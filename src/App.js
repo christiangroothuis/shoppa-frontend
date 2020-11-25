@@ -2,10 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
 
-import API_URL from './api';
+import API_URL from "./api";
 
 function App() {
-
 	const [items, setItems] = useState([]);
 	const [count, setCount] = useState(0);
 	useEffect(() => {
@@ -21,7 +20,7 @@ function App() {
 	}, [count]);
 	return (
 		<div className="App">
-      {count}
+			{count}
 			<button onClick={() => setCount(count + 1)}></button>
 			{items.map((item) => {
 				return (
@@ -29,12 +28,16 @@ function App() {
 						{item.title} €{item.price}
 						{item.images[0] && (
 							<img
-                style={{width:"200px"}}
+								style={{ width: "200px" }}
 								src={item.images[0].image_url}
 								alt={item.title}
 							></img>
 						)}
-            <p dangerouslySetInnerHTML={{__html: item.description}} />
+						<p
+							dangerouslySetInnerHTML={{
+								__html: item.description,
+							}}
+						/>
 					</div>
 				);
 			})}
