@@ -2,12 +2,15 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
 
+import API_URL from './api';
+
 function App() {
+
 	const [items, setItems] = useState([]);
 	const [count, setCount] = useState(0);
 	useEffect(() => {
 		axios
-			.get(`http://127.0.0.1:8000/api/products/`)
+			.get(`${API_URL}/products/`)
 			.then((res) => {
 				setItems(res.data);
 				console.log(res);
@@ -22,7 +25,7 @@ function App() {
 			<button onClick={() => setCount(count + 1)}></button>
 			{items.map((item) => {
 				return (
-					<div>
+					<div key={item.id}>
 						{item.title} €{item.price}
 						{item.images[0] && (
 							<img
