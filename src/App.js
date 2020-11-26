@@ -6,22 +6,27 @@ import API_URL from "./api";
 
 function App() {
 	const [items, setItems] = useState([]);
-	const [count, setCount] = useState(0);
+	const [page, setPage] = useState(1);
 	useEffect(() => {
 		axios
-			.get(`${API_URL}/products`)
+			.get(`${API_URL}/products?page=${page}`)
 			.then((res) => {
-				setItems(res.data);
-				console.log(res);
+				setItems(res.data.data);
+				console.log(res.data.data);
 			})
 			.catch((err) => {
 				console.log(err.config);
 			});
-	}, [count]);
+	}, [page]);
 	return (
 		<div className="App">
-			{count}
-			<button onClick={() => setCount(count + 1)}></button>
+			{page}
+			<button
+				onClick={() => {
+					setPage(page + 1);
+					setItems([]);
+				}}
+			>next</button>
 			{items.map((item) => {
 				return (
 					<div key={item.id}>
