@@ -9,7 +9,7 @@ function App() {
 	const [count, setCount] = useState(0);
 	useEffect(() => {
 		axios
-			.get(`${API_URL}/products/`)
+			.get(`${API_URL}/products`)
 			.then((res) => {
 				setItems(res.data);
 				console.log(res);
