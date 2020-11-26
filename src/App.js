@@ -20,13 +20,6 @@ function App() {
 	}, [page]);
 	return (
 		<div className="App">
-			{page}
-			<button
-				onClick={() => {
-					setPage(page + 1);
-					setItems([]);
-				}}
-			>next</button>
 			{items.map((item) => {
 				return (
 					<div key={item.id}>
@@ -46,6 +39,13 @@ function App() {
 					</div>
 				);
 			})}
+			{page}
+			<button
+				onClick={() => {
+					setPage(page + 1);
+					setItems([]);
+				}}
+			>next</button>
 		</div>
 	);
 }
