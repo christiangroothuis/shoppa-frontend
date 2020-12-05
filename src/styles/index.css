@@ -1,0 +1,61 @@
+@tailwind base;
+
+@font-face {
+	font-family: Circular;
+	font-weight: 400;
+	src: url(../assets/fonts/CircularStd-Book.otf);
+}
+
+@font-face {
+	font-family: Circular;
+	font-weight: 500;
+	src: url(../assets/fonts/CircularStd-Medium.otf);
+}
+
+@font-face {
+	font-family: Circular;
+	font-weight: 700;
+	src: url(../assets/fonts/CircularStd-Bold.otf);
+}
+
+@font-face {
+	font-family: Circular;
+	font-weight: 900;
+	src: url(../assets/fonts/CircularStd-Black.otf);
+}
+
+body {
+	background-color: #f5f5f5;
+	font-family: "Circular";
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.nav-item {
+	@apply px-4 mx-1 h-12 flex items-center font-medium cursor-pointer transition rounded-md;
+}
+
+.nav-item:hover,
+.nav-item.active {
+	background-color: rgb(231, 231, 231);
+}
+
+.text-1-line {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 1; /* number of lines to show */
+	-webkit-box-orient: vertical;
+}
+
+.text-2-lines {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2; /* number of lines to show */
+	-webkit-box-orient: vertical;
+}
+
+@tailwind components;
+@tailwind utilities;
