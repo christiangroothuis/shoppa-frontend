@@ -5,12 +5,11 @@ import useDataApi from "../hooks/api";
 // import ProductCard from "./productCard";
 
 const Home = () => {
-	const [{ data, isLoading, /*isError*/ }, doFetch] = useDataApi("/home");
+	const [{ data, isLoading /*isError*/ }, doFetch] = useDataApi("/home");
 
 	useEffect(() => {
 		doFetch("/home");
 	}, [doFetch]);
-	console.log(data);
 
 	return (
 		<>
@@ -19,15 +18,16 @@ const Home = () => {
 			) : (
 				<div>
 					{data.length > 0 &&
-						data.map((item: any) => (
-							<div className="relative">
+						data.map((item: any, i: number) => (
+							<div className="relative" key={i}>
 								<h1 className="font-bold text-2xl">
 									{item.category.display_name}
 								</h1>
 								<div className="flex">
-									{item.products.map((product: any) => (
+									{item.products.map((product: any, i: number) => (
 										<Link
 											to={`/product/${product.slug}`}
+											key={i}
 											className="bg-white my-5 mr-5 p-5 flex rounded-3xl flex-col items-center justify-evenly"
 											style={{
 												height: "350px",
