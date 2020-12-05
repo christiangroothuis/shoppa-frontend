@@ -1,26 +1,33 @@
+/* purgecss start ignore */
 @tailwind base;
+@tailwind components;
+/* purgecss end ignore */
 
 @font-face {
 	font-family: Circular;
 	font-weight: 400;
+	font-display: swap;
 	src: url(../assets/fonts/CircularStd-Book.otf);
 }
 
 @font-face {
 	font-family: Circular;
 	font-weight: 500;
+	font-display: swap;
 	src: url(../assets/fonts/CircularStd-Medium.otf);
 }
 
 @font-face {
 	font-family: Circular;
 	font-weight: 700;
+	font-display: swap;
 	src: url(../assets/fonts/CircularStd-Bold.otf);
 }
 
 @font-face {
 	font-family: Circular;
 	font-weight: 900;
+	font-display: swap;
 	src: url(../assets/fonts/CircularStd-Black.otf);
 }
 
@@ -57,5 +64,4 @@ body {
 	-webkit-box-orient: vertical;
 }
 
-@tailwind components;
 @tailwind utilities;
