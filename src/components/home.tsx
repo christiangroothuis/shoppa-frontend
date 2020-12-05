@@ -2,10 +2,10 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import useDataApi from "../hooks/api";
-import ProductCard from "./productCard";
+// import ProductCard from "./productCard";
 
 const Home = () => {
-	const [{ data, isLoading, isError }, doFetch] = useDataApi("/home");
+	const [{ data, isLoading, /*isError*/ }, doFetch] = useDataApi("/home");
 
 	useEffect(() => {
 		doFetch("/home");
