@@ -17,7 +17,7 @@
 	},
 	"scripts": {
 		"build:tailwind1": "tailwindcss build src/styles/index.css -o src/styles/output.css",
-		"watch:tailwind": "chokidar 'src/**/*.css' 'src/**/*.scss' --ignore src/styles/output.css -c 'npm run build:css'",
+		"watch:tailwind": "chokidar 'src/**/*.css' 'src/**/*.scss' 'tailwind.config.js' --ignore src/styles/output.css -c 'npm run build:css'",
 		"prestart": "npm run build:css",
 		"prebuild": "npm run build:css",
 		"start2": "react-scripts start && npm run watch",
