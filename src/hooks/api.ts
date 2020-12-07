@@ -9,6 +9,7 @@ const useDataApi = (
 		data: any;
 		isLoading: boolean;
 		isError: boolean;
+		error: {};
 	},
 	React.Dispatch<React.SetStateAction<string>>
 ] => {
@@ -19,6 +20,7 @@ const useDataApi = (
 	const [url, setUrl] = useState(initialUrl);
 	const [isLoading, setIsLoading] = useState(true);
 	const [isError, setIsError] = useState(false);
+	const [error, setError] = useState({});
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -31,6 +33,7 @@ const useDataApi = (
 				setData(result.data);
 			} catch (error) {
 				setIsError(true);
+				setError(error);
 			}
 			setIsLoading(false);
 		};
@@ -38,7 +41,7 @@ const useDataApi = (
 		fetchData();
 	}, [url]);
 
-	return [{ data, isLoading, isError }, setUrl];
+	return [{ data, isLoading, isError, error }, setUrl];
 };
 
 export default useDataApi;
