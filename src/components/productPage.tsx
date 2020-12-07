@@ -32,7 +32,13 @@ const ProductPage = () => {
 	}, [data]);
 
 	if (!isLoading && !isError) {
-		const { title, price, description, images } = data.data;
+		const {
+			title,
+			price,
+			description,
+			images,
+			related_products,
+		} = data.data;
 
 		return (
 			<>
@@ -104,6 +110,16 @@ const ProductPage = () => {
 							/>
 						</>
 					)}
+				</div>
+				<div className="flex">
+					{related_products.map((product: any, i: number) => (
+						<img
+							key={i}
+							className="w-64"
+							alt={product.title}
+							src={product.images[0].image_url}
+						/>
+					))}
 				</div>
 			</>
 		);
