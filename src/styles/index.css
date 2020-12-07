@@ -48,6 +48,17 @@ body {
 	background-color: rgb(231, 231, 231);
 }
 
+.product-grid {
+	grid-auto-rows: 1fr;
+	grid-template-rows: auto;
+	/* grid-template-columns: repeat(auto-fill, minmax(225px, 1fr)); */
+}
+
+.category-grid-item {
+	grid-column-start: 1;
+	grid-column-end: 3;
+}
+
 .text-1-line {
 	overflow: hidden;
 	text-overflow: ellipsis;
