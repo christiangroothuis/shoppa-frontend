@@ -13,7 +13,7 @@ function App() {
 		<Router>
 			<Nav />
 
-			<Container className="mt-14">
+			<Container className="my-14 mt-32">
 				<Switch>
 					<Route path="/" exact>
 						<Home />

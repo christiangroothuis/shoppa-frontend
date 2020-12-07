@@ -9,7 +9,7 @@ import { ReactComponent as User } from "../assets/icons/user.svg";
 
 const Nav = () => {
 	return (
-		<nav className="bg-white sticky top-0 z-20 h-16 flex items-center">
+		<nav className="bg-white fixed w-full top-0 z-20 h-16 flex items-center">
 			<Container className="flex justify-between text-7 h-full items-center">
 				<NavLink to="/" className="font-bold text-4xl">
 					DRIP
@@ -35,7 +35,7 @@ const Nav = () => {
 						placeholder="Zoek naar producten, categorieën..."
 					/>
 				</form>
-				<div className="flex ">
+				<div className="flex">
 					<NavLink
 						className="mx-3"
 						to="/dashboard"
@@ -51,7 +51,7 @@ const Nav = () => {
 						to="/winkelmand"
 						aria-label="winkelmand"
 					>
-						<div className="w-6 h-6 rounded-full bg-red-500 absolute top-0 top right-0 -m-3 flex justify-center items-center text-white text-sm border-white border-2">
+						<div className="w-6 h-6 rounded-full bg-red-500 absolute top-0 top right-0 -m-3 flex justify-center items-center text-white text-sm font-bold border-white border-2">
 							4
 						</div>
 						<ShoppingBag
