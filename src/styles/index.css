@@ -48,6 +48,14 @@ body {
 	background-color: rgb(231, 231, 231);
 }
 
+.grid-1-row {
+	grid-template-rows: 1fr 0;
+}
+
+.grid-2-rows {
+	grid-template-rows: 1fr 1fr 0;
+}
+
 .product-grid {
 	grid-auto-rows: 1fr;
 	grid-template-rows: auto;
@@ -55,8 +63,6 @@ body {
 }
 
 .category-grid-item {
-	grid-column-start: 1;
-	grid-column-end: 3;
 }
 
 .text-1-line {
