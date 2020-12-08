@@ -23,15 +23,11 @@ const Nav = () => {
 					</NavLink>
 					<NavLink to="/producten" className="nav-item">
 						Producten
-						{/* <Chevron
-							viewBox="0 0 24 24"
-							className="h-4 w-4 ml-1 inline-block stroke-3"
-						/> */}
 					</NavLink>
 				</div>
 				<form className="w-3/5 max-w-md">
 					<input
-						className="bg-white border-2 border-gray p-2.5 px-4 rounded-xl w-full"
+						className="bg-white border-2 border-gray p-2.5 px-4 rounded-xl w-full focus:border-blue-500"
 						placeholder="Zoek naar producten, categorieën..."
 					/>
 				</form>
