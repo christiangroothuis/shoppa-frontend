@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import useDataApi from "../hooks/api";
+import range from "../utils/range";
 
 import ProductCard from "./productCard";
 import Container from "./container";
@@ -9,10 +10,6 @@ import Container from "./container";
 import { ReactComponent as TrashCan } from "../assets/icons/trash-2.svg";
 import { ReactComponent as Edit } from "../assets/icons/edit-3.svg";
 import { ReactComponent as Check } from "../assets/icons/check.svg";
-
-interface Image {
-	image_url: string;
-}
 
 const ProductPage = () => {
 	const { productId }: { productId: string } = useParams();
@@ -23,11 +20,20 @@ const ProductPage = () => {
 
 	const [currentImage, setCurrentImage] = useState("");
 
+	const initialSelectedSize: Stock = {
+		size: null,
+		availability: null,
+	};
+	const [selectedSize, setSelectedSize] = useState<Stock>(
+		initialSelectedSize
+	);
+
 	useEffect(() => {
 		doFetch(`/products/${productId}`);
 	}, [doFetch, productId]);
 
 	useEffect(() => {
+		setSelectedSize(initialSelectedSize);
 		if (
 			data &&
 			data.data &&
@@ -36,6 +42,7 @@ const ProductPage = () => {
 		) {
 			setCurrentImage(data.data.images[0].image_url);
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [data]);
 
 	if (!isLoading && !isError) {
@@ -51,14 +58,15 @@ const ProductPage = () => {
 			<>
 				<div className="flex justify-end fixed left-0 w-full top-22 mx-auto z-20">
 					<Container className="flex justify-end w-full">
-						<button className="cursor-pointer flex justify-center items-center bg-white rounded-full w-14 h-14 shadow-sm hover:shadow-md transition-shadow active:shadow-sm active:translate-y-14 mr-2">
+						<button className="clickable cursor-pointer flex justify-center items-center bg-white rounded-full w-14 h-14 mr-2">
 							<Edit />
 						</button>
-						<button className="cursor-pointer flex justify-center items-center bg-white rounded-full w-14 h-14 shadow-sm hover:shadow-md transition-shadow active:shadow-sm text-red-500">
+						<button className="clickable cursor-pointer flex justify-center items-center bg-white rounded-full w-14 h-14 text-red-500">
 							<TrashCan />
 						</button>
 					</Container>
 				</div>
+
 				<div className="flex relative mb-14 text-drakgray">
 					<div className="flex flex-col p-12 w-9/16 bg-white rounded-4xl mr-14">
 						<div className="w-full h-110 mb-4 relative">
@@ -108,15 +116,73 @@ const ProductPage = () => {
 						<h1 className="font-bold text-4.5xl mb-4 leading-tight">
 							{title}
 						</h1>
-						<span className="font-bold text-3xl mb-4">
+						<span className="font-bold text-3xl mb-5">
 							€{price}
 						</span>
-						<span className="font-medium text-2xl text-green-600 flex items-center">
-							<div className="w-6 h-6 p-1 mr-2 inline-flex rounded-full bg-green-600 items-center justify-center">
-								<Check className="text-white stroke-4" />
+						<span className="font-bold text-xl mb-2">Maten:</span>
+						<div className="mb-6">
+							<div
+								className="grid grid-cols-4 gap-2"
+								style={{
+									gridTemplateColumns:
+										"repeat(4, minmax(0, 4rem))",
+								}}
+							>
+								{[
+									{ size: "S", availability: 15 },
+									{ size: "M", availability: 164 },
+									{ size: "L", availability: 30 },
+									{ size: "XL", availability: 0 },
+								].map((stock: Stock, i: number) => {
+									return (
+										<button
+											key={i}
+											onClick={() =>
+												setSelectedSize(stock)
+											}
+											className={`${
+												stock.size === selectedSize.size
+													? `bg-black text-white clicked`
+													: `bg-white`
+											} clickable p-2 rounded-md text-center font-medium text-1.5xl cursor-pointer`}
+										>
+											{stock.size}
+										</button>
+									);
+								})}
 							</div>
-							Voor 23:59 besteld? Morgen in huis!
-						</span>
+							{selectedSize.availability !== null && (
+								<span
+									className="block mt-2"
+									style={{
+										color: `hsl(${range(
+											selectedSize.availability
+										)},94%, 40%)`,
+									}}
+								>
+									{selectedSize.availability} op voorraad
+								</span>
+							)}
+						</div>
+						<span></span>
+						{selectedSize.availability !== 0 && (
+							<span className="font-medium text-1.5xl mb-6 text-green-600 flex items-center">
+								<div className="w-6 h-6 p-1 mr-2 inline-flex rounded-full bg-green-600 items-center justify-center">
+									<Check className="text-white stroke-4" />
+								</div>
+								Voor 23:59 besteld? Morgen in huis!
+							</span>
+						)}
+						<button
+							disabled
+							className={`${
+								selectedSize.availability !== 0
+									? `clickable`
+									: `opacity-50`
+							}  max-w-xs w-full bg-white rounded-xl p-4 font-bold text-xl`}
+						>
+							Toevoegen aan winkelmand
+						</button>
 					</div>
 				</div>
 				<div className="flex">
