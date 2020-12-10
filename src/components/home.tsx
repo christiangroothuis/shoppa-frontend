@@ -26,7 +26,7 @@ const Home = () => {
 							return (
 								<div
 									key={id}
-									className="category-grid-item mx-auto grid grid-1-row gap-x-4 gap-y-8 lg:grid-cols-4 xl:grid-cols-5 overflow-hidden mb-8 lg:mb-0 text-drakgray"
+									className="mx-auto grid grid-1-row gap-x-4 gap-y-8 lg:grid-cols-4 xl:grid-cols-5 overflow-hidden mb-8 lg:mb-0 text-drakgray"
 								>
 									<Link
 										to={`/producten?category=${display_name}`}

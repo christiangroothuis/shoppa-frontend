@@ -9,7 +9,7 @@ import { ReactComponent as User } from "../assets/icons/user.svg";
 
 const Nav = () => {
 	return (
-		<nav className="bg-white fixed w-full top-0 z-20 h-16 flex items-center">
+		<nav className="bg-white fixed w-full top-0 z-20 h-16 flex items-center border-b-2 border-gray-100">
 			<Container className="flex justify-between text-7 h-full items-center">
 				<NavLink to="/" className="font-bold text-4xl">
 					DRIP
@@ -39,7 +39,7 @@ const Nav = () => {
 					>
 						<User
 							viewBox="0 0 24 24"
-							className="h-7 w-7 ml-1 inline-block"
+							className="h-7 w-7 ml-1 inline-block stroke-2"
 						/>
 					</NavLink>
 					<NavLink
@@ -52,7 +52,7 @@ const Nav = () => {
 						</div>
 						<ShoppingBag
 							viewBox="0 0 24 24"
-							className="h-7 w-7 ml-1 inline-block"
+							className="h-7 w-7 ml-1 inline-block stroke-2"
 						/>
 					</NavLink>
 				</div>
