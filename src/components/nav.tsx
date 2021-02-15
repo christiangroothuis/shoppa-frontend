@@ -8,6 +8,51 @@ import { ReactComponent as ShoppingBag } from "../assets/icons/shopping-bag.svg"
 import { ReactComponent as User } from "../assets/icons/user.svg";
 
 const Nav = () => {
+
+
+	const cart = [
+		{
+			id: 1,
+			name: "yeezy 350",
+			price: 340,
+			quantity: 20,
+			images: [
+				{
+					image_url:
+						"https://stockx.imgix.net/images/adidas-Yeezy-Boost-350-V2-Clay-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&auto=format,compress&trim=color&q=90&dpr=2&updated_at=1606321232",
+				},
+			],
+		},
+		{
+			id: 2,
+			name: "yeezy 350",
+			price: 340,
+			quantity: 2,
+			images: [
+				{
+					image_url:
+						"https://stockx.imgix.net/images/adidas-Yeezy-Boost-350-V2-Clay-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&auto=format,compress&trim=color&q=90&dpr=2&updated_at=1606321232",
+				},
+			],
+		},
+		{
+			id: 3,
+			name: "yeezy 350",
+			price: 340,
+			quantity: 2,
+			images: [
+				{
+					image_url:
+						"https://stockx.imgix.net/images/adidas-Yeezy-Boost-350-V2-Clay-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&auto=format,compress&trim=color&q=90&dpr=2&updated_at=1606321232",
+				},
+			],
+		},
+	];
+
+	let totalQuantity = cart.reduce((acc, cur) => {
+		return acc + cur.quantity;
+	}, 0);
+
 	return (
 		<nav className="bg-white fixed w-full top-0 z-20 h-16 flex items-center border-b-2 border-gray-100">
 			<Container className="flex justify-between text-7 h-full items-center">
@@ -47,8 +92,8 @@ const Nav = () => {
 						to="/winkelmand"
 						aria-label="winkelmand"
 					>
-						<div className="w-6 h-6 rounded-full bg-red-500 absolute top-0 top right-0 -m-3 flex justify-center items-center text-white text-sm font-bold border-white border-2">
-							4
+						<div className="w-6 h-6 rounded-full overflow-hidden bg-red-500 absolute top-0 top right-0 -m-3 flex justify-center items-center text-white text-sm font-bold border-white border-2">
+							{totalQuantity}
 						</div>
 						<ShoppingBag
 							viewBox="0 0 24 24"
