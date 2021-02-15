@@ -21,6 +21,7 @@ function App() {
 					</Route>
 					<Route path="/overview">overview</Route>
 					<Route path="/search">search</Route>
+					<Route path="/winkelmand">winkelmand</Route>
 					<Route path="/producten/" exact>
 						<ProductOverview />
 					</Route>
