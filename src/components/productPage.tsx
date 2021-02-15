@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 import useDataApi from "../hooks/api";
 import range from "../utils/range";
@@ -56,6 +57,9 @@ const ProductPage = () => {
 
 		return (
 			<>
+				<Helmet>
+					<title>{title}</title>
+				</Helmet>
 				<div className="flex justify-end fixed left-0 w-full top-22 mx-auto z-20">
 					<Container className="flex justify-end w-full">
 						<button className="clickable cursor-pointer flex justify-center items-center bg-white rounded-full w-14 h-14 mr-2">
@@ -88,12 +92,12 @@ const ProductPage = () => {
 									return (
 										<div
 											key={i}
-											className={`rounded-lg h-22 w-22 mr-2 flex flex-none items-center justify-center border-2 p-1 transition-colors ${
+											className={`cursor-pointer rounded-lg h-22 w-22 mr-2 flex flex-none items-center justify-center border-2 p-1 transition-colors ${
 												currentImage === image_url
 													? ` border-blue-500`
 													: ` border-gray-200`
 											}`}
-											onMouseEnter={() =>
+											onClick={() =>
 												setCurrentImage(image_url)
 											}
 										>
@@ -125,7 +129,8 @@ const ProductPage = () => {
 								className="grid grid-cols-4 gap-2"
 								style={{
 									gridTemplateColumns:
-										"repeat(4, minmax(0, 4rem))",
+										"repeat(auto-fill,minmax(60px,1fr))",
+									// "repeat(4, minmax(0, 4rem))",
 								}}
 							>
 								{[

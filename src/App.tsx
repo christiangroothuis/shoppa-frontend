@@ -11,7 +11,7 @@ import "./styles/output.css";
 
 function App() {
 	return (
-		<Router>
+		<Router basename="/informatica/leerlingenwebsites/IN2021/ProjectWebsites/Drip/">
 			<Nav />
 
 			<Container className="my-14 mt-32">

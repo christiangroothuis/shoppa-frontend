@@ -16,7 +16,9 @@ const CardSection = () => {
 	// 		? parseInt(query.get("page"))
 	// 		: 1;
 
-	const [pageNumber, setPageNumber] = useState(1);
+	const [pageNumber, setPageNumber] = useState(
+		parseInt(query.get("page") || "1")
+	);
 	const [{ data, isLoading, isError, error }, doFetch] = useDataApi(
 		`/products?page=${pageNumber}?category=${query.get(
 			"category"

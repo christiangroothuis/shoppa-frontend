@@ -13,7 +13,8 @@ const useDataApi = (
 	},
 	React.Dispatch<React.SetStateAction<string>>
 ] => {
-	const API_URL = "https://shoppa-backend-v2.herokuapp.com/api";
+	const API_URL = "http://informatica.gymnasiumbreda.nl/informatica/leerlingenwebsites/IN2021/ProjectWebsites/Drip/backend/public/api";
+	// const API_URL = "https://shoppa-backend-v2.herokuapp.com/api";
 	// const API_URL = "http://localhost:8000/api";
 
 	const [data, setData] = useState(initialData);
@@ -45,5 +46,3 @@ const useDataApi = (
 };
 
 export default useDataApi;
-
-// : [any, React.Dispatch<React.SetStateAction<string>>]
