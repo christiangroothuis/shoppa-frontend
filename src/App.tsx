@@ -6,6 +6,7 @@ import Nav from "./components/nav";
 import Home from "./components/home";
 import ProductPage from "./components/productPage";
 import ProductOverview from "./components/productOverview";
+import Cart from "./components/cart";
 
 import "./styles/output.css";
 
@@ -21,7 +22,8 @@ function App() {
 					</Route>
 					<Route path="/overview">overview</Route>
 					<Route path="/search">search</Route>
-					<Route path="/winkelmand">winkelmand</Route>
+					{/* <Route path="/winkelmand">winkelmand</Route> */}
+					<Route path="/winkelmand"><Cart/></Route>
 					<Route path="/producten/" exact>
 						<ProductOverview />
 					</Route>
