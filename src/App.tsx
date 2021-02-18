@@ -7,34 +7,41 @@ import Home from "./components/home";
 import ProductPage from "./components/productPage";
 import ProductOverview from "./components/productOverview";
 import Cart from "./components/cart";
+import Footer from "./components/footer";
+
+import GlobalState from "./context/globalState";
 
 import "./styles/output.css";
 
 function App() {
 	return (
-		<Router basename="/informatica/leerlingenwebsites/IN2021/ProjectWebsites/Drip/">
-			<Nav />
+		<GlobalState>
+			<Router basename="/informatica/leerlingenwebsites/IN2021/ProjectWebsites/Drip/">
+				<div className="flex flex-col justify-between min-h-screen">
+					<Nav />
 
-			<Container className="my-14 mt-32">
-				<Switch>
-					<Route path="/" exact>
-						<Home />
-					</Route>
-					<Route path="/overview">overview</Route>
-					<Route path="/search">search</Route>
-					{/* <Route path="/winkelmand">winkelmand</Route> */}
-					<Route path="/winkelmand"><Cart/></Route>
-					<Route path="/producten/" exact>
-						<ProductOverview />
-					</Route>
-					<Route path="/product/:productId">
-						<ProductPage />
-					</Route>
-
-					<Route path="/about">over</Route>
-				</Switch>
-			</Container>
-		</Router>
+					<Container className="my-14 mt-32">
+						<Switch>
+							<Route path="/" exact>
+								<Home />
+							</Route>
+							{/* <Route path="/search">search</Route> */}
+							<Route path="/winkelmand">
+								<Cart />
+							</Route>
+							<Route path="/producten/" exact>
+								<ProductOverview />
+							</Route>
+							<Route path="/product/:productId">
+								<ProductPage />
+							</Route>
+							<Route path="/about">over</Route>
+						</Switch>
+					</Container>
+					<Footer />
+				</div>
+			</Router>
+		</GlobalState>
 	);
 }
 

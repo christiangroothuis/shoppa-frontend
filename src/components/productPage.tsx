@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Helmet } from "react-helmet";
 
 import useDataApi from "../hooks/api";
 import range from "../utils/range";
@@ -12,7 +11,14 @@ import { ReactComponent as TrashCan } from "../assets/icons/trash-2.svg";
 import { ReactComponent as Edit } from "../assets/icons/edit-3.svg";
 import { ReactComponent as Check } from "../assets/icons/check.svg";
 
+import ShopContext from "../context/shopContext";
+import Spinner from "./spinner";
+
 const ProductPage = () => {
+	const context = useContext(ShopContext);
+	const addProduct = context.addProductToCart;
+
+	const cart = context.cart;
 	const { productId }: { productId: string } = useParams();
 
 	const [{ data, isLoading, isError }, doFetch] = useDataApi(
@@ -21,20 +27,16 @@ const ProductPage = () => {
 
 	const [currentImage, setCurrentImage] = useState("");
 
-	const initialSelectedSize: Stock = {
-		size: null,
-		availability: null,
-	};
-	const [selectedSize, setSelectedSize] = useState<Stock>(
-		initialSelectedSize
-	);
+	const [imageLoaded, setImageLoaded] = useState(false);
 
 	useEffect(() => {
 		doFetch(`/products/${productId}`);
+		return () => {
+			setImageLoaded(false);
+		};
 	}, [doFetch, productId]);
 
 	useEffect(() => {
-		setSelectedSize(initialSelectedSize);
 		if (
 			data &&
 			data.data &&
@@ -53,13 +55,19 @@ const ProductPage = () => {
 			description,
 			images,
 			related_products,
+			slug,
+			availability = 5,
 		} = data.data;
+
+		const inCart = cart.filter((item) => item.slug === slug);
+
+		const currentInCart =
+			inCart[0] && inCart[0].quantity ? inCart[0].quantity : 0;
+
+		const available = availability - currentInCart;
 
 		return (
 			<>
-				<Helmet>
-					<title>{title}</title>
-				</Helmet>
 				<div className="flex justify-end fixed left-0 w-full top-22 mx-auto z-20">
 					<Container className="flex justify-end w-full">
 						<button className="clickable cursor-pointer flex justify-center items-center bg-white rounded-full w-14 h-14 mr-2">
@@ -75,13 +83,17 @@ const ProductPage = () => {
 					<div className="flex flex-col p-12 w-9/16 bg-white rounded-4xl mr-14">
 						<div className="w-full h-110 mb-4 relative">
 							<img
-								className="object-contain w-full h-full absolute"
+								className={`object-contain w-full h-full absolute ${
+									imageLoaded ? `opacity-100` : `opacity-0`
+								}`}
+								style={{ transitionDuration: "300ms" }}
 								src={
 									images[0] && images[0].image_url !== null
 										? currentImage
-										: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.ytimg.com%2Fvi%2FlVUEWS4wkYk%2Fhqdefault.jpg&f=1&nofb=1"
+										: "https://cdn.discordapp.com/attachments/811000693715370005/811286686675370014/Drip_Placeholder.png"
 								}
 								alt={title}
+								onLoad={() => setImageLoaded(true)}
 							/>
 						</div>
 						{images.length > 1 && (
@@ -97,7 +109,7 @@ const ProductPage = () => {
 													? ` border-blue-500`
 													: ` border-gray-200`
 											}`}
-											onClick={() =>
+											onMouseEnter={() =>
 												setCurrentImage(image_url)
 											}
 										>
@@ -123,54 +135,21 @@ const ProductPage = () => {
 						<span className="font-bold text-3xl mb-5">
 							€{price}
 						</span>
-						<span className="font-bold text-xl mb-2">Maten:</span>
 						<div className="mb-6">
-							<div
-								className="grid grid-cols-4 gap-2"
-								style={{
-									gridTemplateColumns:
-										"repeat(auto-fill,minmax(60px,1fr))",
-									// "repeat(4, minmax(0, 4rem))",
-								}}
-							>
-								{[
-									{ size: "S", availability: 15 },
-									{ size: "M", availability: 164 },
-									{ size: "L", availability: 30 },
-									{ size: "XL", availability: 0 },
-								].map((stock: Stock, i: number) => {
-									return (
-										<button
-											key={i}
-											onClick={() =>
-												setSelectedSize(stock)
-											}
-											className={`${
-												stock.size === selectedSize.size
-													? `bg-black text-white clicked`
-													: `bg-white`
-											} clickable p-2 rounded-md text-center font-medium text-1.5xl cursor-pointer`}
-										>
-											{stock.size}
-										</button>
-									);
-								})}
-							</div>
-							{selectedSize.availability !== null && (
+							{availability !== null && !isNaN(availability) && (
 								<span
 									className="block mt-2"
 									style={{
 										color: `hsl(${range(
-											selectedSize.availability
+											available
 										)},94%, 40%)`,
 									}}
 								>
-									{selectedSize.availability} op voorraad
+									{available} op voorraad
 								</span>
 							)}
 						</div>
-						<span></span>
-						{selectedSize.availability !== 0 && (
+						{availability > 0 && (
 							<span className="font-medium text-1.5xl mb-6 text-green-600 flex items-center">
 								<div className="w-6 h-6 p-1 mr-2 inline-flex rounded-full bg-green-600 items-center justify-center">
 									<Check className="text-white stroke-4" />
@@ -179,11 +158,20 @@ const ProductPage = () => {
 							</span>
 						)}
 						<button
-							disabled
+							onClick={() => {
+								if (available > 0) {
+									addProduct({
+										title,
+										price,
+										images,
+										slug,
+										availability,
+										quantity: currentInCart,
+									});
+								}
+							}}
 							className={`${
-								selectedSize.availability !== 0
-									? `clickable`
-									: `opacity-50`
+								available > 0 ? `clickable` : `opacity-50`
 							}  max-w-xs w-full bg-white rounded-xl p-4 font-bold text-xl`}
 						>
 							Toevoegen aan winkelmand
@@ -237,9 +225,25 @@ const ProductPage = () => {
 			</>
 		);
 	} else if (isLoading) {
-		return <span>Loading...</span>;
+		return (
+			<>
+				<div className="flex relative mb-14 text-drakgray">
+					<div className="flex flex-col p-12 w-9/16 bg-white rounded-4xl mr-14">
+						<div className="w-full h-110 mb-4 relative flex justify-center items-center">
+							<Spinner/>
+						</div>
+					</div>
+					<div className="flex flex-col flex-1 mt-8">
+						<h1 className="font-bold text-4.5xl mb-4 leading-tight">
+							{/* bruh */}
+						</h1>
+						{/* <span className="font-bold text-3xl mb-5">€69.69</span> */}
+					</div>
+				</div>
+			</>
+		);
 	} else {
-		return <span>Error</span>;
+		return <span>error</span>;
 	}
 };
 

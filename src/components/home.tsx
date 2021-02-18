@@ -29,7 +29,7 @@ const Home = () => {
 									className="mx-auto grid grid-1-row gap-x-4 gap-y-8 lg:grid-cols-4 xl:grid-cols-5 overflow-hidden mb-8 lg:mb-0 text-drakgray"
 								>
 									<Link
-										to={`/producten?category=${display_name}`}
+										to={`/producten?category=${id}`}
 										className="col-span-2 px-10 py-8 flex rounded-3xl flex-col justify-end"
 										style={{
 											backgroundColor: color,
