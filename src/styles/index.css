@@ -134,22 +134,38 @@ body {
 
 @keyframes rotate {
 	100% {
-	  transform: rotate(360deg);
+		transform: rotate(360deg);
 	}
 }
 
 @keyframes dash {
 	0% {
-	  stroke-dasharray: 1, 200;
-	  stroke-dashoffset: 0;
+		stroke-dasharray: 1, 200;
+		stroke-dashoffset: 0;
 	}
 	50% {
-	  stroke-dasharray: 90, 200;
-	  stroke-dashoffset: -35px;
+		stroke-dasharray: 90, 200;
+		stroke-dashoffset: -35px;
 	}
 	100% {
-	  stroke-dashoffset: -125px;
+		stroke-dashoffset: -125px;
 	}
+}
+
+.ReactModal__Overlay {
+	opacity: 0;
+	transform: translateY(-100px);
+	transition: all 300ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open {
+	opacity: 1;
+	transform: translateY(0px);
+}
+
+.ReactModal__Overlay--before-close {
+	opacity: 0;
+	transform: translateY(-100px);
 }
 
 @tailwind utilities;

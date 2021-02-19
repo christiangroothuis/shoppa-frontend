@@ -34,9 +34,9 @@ const CardSection = () => {
 			<div className="w-full">
 				{isLoading ? (
 					<div className="mx-auto grid gap-x-4 gap-y-8 lg:grid-cols-3 xl:grid-cols-4 overflow-hidden mb-8  text-drakgray">
-						{[...Array(24)].map((item) => (
+						{[...Array(24)].map((item,i) => (
 							<div
-								key={item}
+								key={i}
 								className="h-80 rounded-3xl card"
 							></div>
 						))}
@@ -90,9 +90,8 @@ const CardSection = () => {
 											aria-hidden="true"
 										>
 											<path
-												fill-rule="evenodd"
+												fillRule="evenodd"
 												d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-												clip-rule="evenodd"
 											/>
 										</svg>
 									</Link>
@@ -166,9 +165,8 @@ const CardSection = () => {
 											aria-hidden="true"
 										>
 											<path
-												fill-rule="evenodd"
+												fillRule="evenodd"
 												d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-												clip-rule="evenodd"
 											/>
 										</svg>
 									</Link>

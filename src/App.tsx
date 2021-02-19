@@ -8,6 +8,7 @@ import ProductPage from "./components/productPage";
 import ProductOverview from "./components/productOverview";
 import Cart from "./components/cart";
 import Footer from "./components/footer";
+import Dashboard from "./components/dashboard";
 
 import GlobalState from "./context/globalState";
 
@@ -31,6 +32,9 @@ function App() {
 							</Route>
 							<Route path="/producten/" exact>
 								<ProductOverview />
+							</Route>
+							<Route path="/dashboard/" exact>
+								<Dashboard />
 							</Route>
 							<Route path="/product/:productId">
 								<ProductPage />

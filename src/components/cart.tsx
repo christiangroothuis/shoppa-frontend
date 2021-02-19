@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 
 import ShopContext from "../context/shopContext";
 
 const ProductCard = () => {
+	const history = useHistory();
+
 	const context = useContext(ShopContext);
 
 	const removeProduct = context.removeProductFromCart;
@@ -58,7 +60,9 @@ const ProductCard = () => {
 													to={`/product/${item.slug}`}
 													className="mb-1 hover:underline text-lg"
 												>
-													<span className="text-2-lines">{item.title}</span>
+													<span className="text-2-lines">
+														{item.title}
+													</span>
 												</Link>
 												<button
 													onClick={() => {
@@ -120,7 +124,12 @@ const ProductCard = () => {
 									€{totalAmount}
 								</div>
 							</div>
-							<button className="clickable flex justify-center w-full px-10 py-4 mt-3 font-medium text-white  bg-black rounded-xl text-xl">
+							<button
+								onClick={() => {
+									history.push("/");
+								}}
+								className="clickable flex justify-center w-full px-10 py-4 mt-3 font-medium text-white  bg-black rounded-xl text-xl"
+							>
 								Afrekenen
 							</button>
 						</div>

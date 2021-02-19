@@ -28,13 +28,16 @@ const CategoriesList = ({
 			) : (
 				<ul className="ml-2 mt-5 max-w-100">
 					{isError ? (
-						<div className="whitespace-pre-wrap overflow-scroll">{JSON.stringify(error)}</div>
+						<div className="whitespace-pre-wrap overflow-scroll">
+							{JSON.stringify(error)}
+						</div>
 					) : (
 						[
 							{ display_name: "Alle producten", id: 0 },
 							...data,
-						].map((category) => (
+						].map((category, i) => (
 							<li
+								key={i}
 								className={`text-2xl font-bold my-3 ${
 									category_id === category.id && `underline`
 								}`}
