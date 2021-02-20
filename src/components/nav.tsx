@@ -56,7 +56,7 @@ const Nav = () => {
 	return (
 		<nav className="bg-white fixed w-full top-0 z-50 h-16 flex items-center border-b-2 border-gray-100">
 			<Container className="flex justify-between text-7 h-full items-center">
-				<NavLink to="/" className="font-bold text-4xl">
+				<NavLink to="/" className="font-black text-4xl">
 					DRIP
 				</NavLink>
 				<div className="flex justify-between text-xl">

@@ -13,7 +13,7 @@ const Footer = ({ className }: { className?: string }) => {
 				<div className="flex items-center font-medium text-base">
 					Drip 2021
 				</div>
-				<span className="text-5xl font-bold ">DRIP</span>
+				<span className="text-5xl font-black">DRIP</span>
 				<Link to="/over#disclaimer" className="underline cursor-pointer">Disclaimer</Link>
 			</Container>
 		</footer>
