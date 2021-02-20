@@ -63,7 +63,7 @@ const Nav = () => {
 					<NavLink exact className="nav-item" to="/">
 						Home
 					</NavLink>
-					<NavLink className="nav-item" to="/about">
+					<NavLink className="nav-item" to="/over">
 						Info
 					</NavLink>
 					<NavLink to="/producten" className="nav-item">

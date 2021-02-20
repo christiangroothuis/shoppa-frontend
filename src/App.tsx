@@ -13,6 +13,7 @@ import Dashboard from "./components/dashboard";
 import GlobalState from "./context/globalState";
 
 import "./styles/output.css";
+import Info from "./components/info";
 
 function App() {
 	return (
@@ -39,7 +40,7 @@ function App() {
 							<Route path="/product/:productId">
 								<ProductPage />
 							</Route>
-							<Route path="/about">over</Route>
+							<Route path="/over"><Info/></Route>
 						</Switch>
 					</Container>
 					<Footer />
