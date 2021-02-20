@@ -69,7 +69,7 @@ const Nav = () => {
 					<NavLink to="/producten" className="nav-item">
 						Producten
 					</NavLink>
-					<a className="nav-item bg-black text-white hover:bg-gray-500" href="https://google.com" target="_blank">
+					<a className="nav-item bg-black text-white hover:bg-gray-500" href="https://google.com" target="_blank" rel="noreferrer">
 						Help
 					</a>
 				</div>

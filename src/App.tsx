@@ -9,6 +9,7 @@ import ProductOverview from "./components/productOverview";
 import Cart from "./components/cart";
 import Footer from "./components/footer";
 import Dashboard from "./components/dashboard";
+import Return from "./components/return";
 
 import GlobalState from "./context/globalState";
 
@@ -41,6 +42,9 @@ function App() {
 								<ProductPage />
 							</Route>
 							<Route path="/over"><Info/></Route>
+							<Route path="/return" exact>
+								<Return />
+							</Route>
 						</Switch>
 					</Container>
 					<Footer />
