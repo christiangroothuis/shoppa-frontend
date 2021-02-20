@@ -9,7 +9,7 @@ const Info = () => {
         Deze website is gemaakt door Christian Groothuis, Aram Jegoian, Kuba Pelka, Pepijn Weijerman en Troy van Wezel voor het vak informatica.<br></br>
         DRIP is een webshop dat producten verkoopt uit verschillende categorieën bestaande uit onder andere: schoenen, kleding, accessoires, elektronica, tassen en horloges.<br></br>
         Ons doel is om onze klanten blij te maken met een groot assortiment van producten, die makkelijk te verkrijgen zijn via onze website.<br></br>
-        De naam "Drip" is een referentie naar het woord "dripping" dat in de Verenigde Staten is gepopulariseerd, door middel van dit woord wordt er aangeduid dat iemands outfit zeer in de mode is.<br></br>
+        De naam "Drip" is een referentie naar het woord "dripping" uit het Engels dat in de Verenigde Staten is gepopulariseerd, door middel van dit woord wordt er aangeduid dat iemands outfit zeer in de mode is.<br></br>
         Wij hebben voor deze naam gekozen, omdat wij in eerste instantie een streetwear webshop wilden maken, echter hebben wij later gekozen om een groter assortiment te implementeren.<br></br>
             <br></br>
             <br></br>
