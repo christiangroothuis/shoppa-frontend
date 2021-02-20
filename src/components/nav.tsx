@@ -83,7 +83,7 @@ const Nav = () => {
 						onChange={onChange}
 						value={query}
 						className="bg-white relative border-2 border-gray p-2.5 px-4 rounded-xl w-full focus:border-blue-500 z-40"
-						placeholder="Zoek naar producten, categorieën..."
+						placeholder="Zoek naar merken, producten..."
 					/>
 					{showResult && query.length > 1 && (
 						<div className="absolute w-full bg-white h-150 max-h-screen rounded-b-2xl overflow-y-scroll pt-2 -mt-2 border-2 border-gray">
