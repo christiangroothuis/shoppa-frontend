@@ -24,27 +24,31 @@ const Info = () => {
                 <Link
                     to="/"
                     className="clickable flex justify-center mr-5 px-10 py-4 mt-3 w-88 font-medium text-white  bg-black rounded-xl text-xl"
-                ><Download className="mr-2"/>Projectplan</Link>
+                ><Download className="mr-2" />Projectplan</Link>
                 <Link
                     to="/"
                     className="clickable flex justify-center mr-5 px-10 py-4 mt-3 w-88 font-medium text-white  bg-black rounded-xl text-xl"
-                ><Download className="mr-2"/>SRD</Link>
+                ><Download className="mr-2" />SRD</Link>
                 <Link
                     to="/"
                     className="clickable flex justify-center mr-5 px-10 py-4 mt-3 w-88 font-medium text-white  bg-black rounded-xl text-xl"
-                ><Download className="mr-2"/>Designdocument</Link>
+                ><Download className="mr-2" />Designdocument</Link>
                 <Link
                     to="/"
                     className="clickable flex justify-center mr-5 px-10 py-4 mt-3 w-88 font-medium text-white  bg-black rounded-xl text-xl"
-                ><Download className="mr-2"/>Planning & Taakverdeling</Link>
+                ><Download className="mr-2" />Databasedocument</Link>
                 <Link
                     to="/"
                     className="clickable flex justify-center mr-5 px-10 py-4 mt-3 w-88 font-medium text-white  bg-black rounded-xl text-xl"
-                ><Download className="mr-2"/>Logboeken</Link>
+                ><Download className="mr-2" />Planning & Taakverdeling</Link>
                 <Link
                     to="/"
                     className="clickable flex justify-center mr-5 px-10 py-4 mt-3 w-88 font-medium text-white  bg-black rounded-xl text-xl"
-                ><Download className="mr-2"/>Testrapporten</Link>
+                ><Download className="mr-2" />Logboeken</Link>
+                <Link
+                    to="/"
+                    className="clickable flex justify-center mr-5 px-10 py-4 mt-3 w-88 font-medium text-white  bg-black rounded-xl text-xl"
+                ><Download className="mr-2" />Testrapporten</Link>
             </div>
         </div>
     );
