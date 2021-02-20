@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import useDataApi from "../hooks/api";
+import jwt_decode from "jwt-decode";
 import range from "../utils/range";
 
 import ProductCard from "./productCard";
@@ -21,13 +22,30 @@ const ProductPage = () => {
 	const cart = context.cart;
 	const { productId }: { productId: string } = useParams();
 
-	const [{ data, isLoading, isError }, doFetch] = useDataApi(
+	const [{ data, isLoading, isError, error }, doFetch]:[{data:any, isLoading:boolean, isError:boolean, error:any},any] = useDataApi(
 		`/products/${productId}`
 	);
 
 	const [currentImage, setCurrentImage] = useState("");
 
 	const [imageLoaded, setImageLoaded] = useState(false);
+
+	const [showEditButtons, setshowEditButtons] = useState(false);
+
+	useEffect(() => {
+		if (localStorage.user) {
+			const decodedToken: any = jwt_decode(
+				JSON.parse(localStorage.user).token
+			);
+
+			if (
+				Date.now() <= decodedToken.exp * 1000 &&
+				JSON.parse(localStorage.user).user.role === "admin"
+			) {
+				setshowEditButtons(true);
+			}
+		}
+	}, []);
 
 	useEffect(() => {
 		doFetch(`/products/${productId}`);
@@ -68,16 +86,18 @@ const ProductPage = () => {
 
 		return (
 			<>
-				<div className="flex justify-end fixed left-0 w-full top-22 mx-auto z-20">
-					<Container className="flex justify-end w-full">
-						<button className="clickable cursor-pointer flex justify-center items-center bg-white rounded-full w-14 h-14 mr-2">
-							<Edit />
-						</button>
-						<button className="clickable cursor-pointer flex justify-center items-center bg-white rounded-full w-14 h-14 text-red-500">
-							<TrashCan />
-						</button>
-					</Container>
-				</div>
+				{showEditButtons && (
+					<div className="flex justify-end fixed left-0 w-full top-22 mx-auto z-20">
+						<Container className="flex justify-end w-full">
+							<button className="clickable cursor-pointer flex justify-center items-center bg-white rounded-full w-14 h-14 mr-2">
+								<Edit />
+							</button>
+							<button className="clickable cursor-pointer flex justify-center items-center bg-white rounded-full w-14 h-14 text-red-500">
+								<TrashCan />
+							</button>
+						</Container>
+					</div>
+				)}
 
 				<div className="flex relative mb-14 text-drakgray">
 					<div className="flex flex-col p-12 w-9/16 bg-white rounded-4xl mr-14">
@@ -230,7 +250,7 @@ const ProductPage = () => {
 				<div className="flex relative mb-14 text-drakgray">
 					<div className="flex flex-col p-12 w-9/16 bg-white rounded-4xl mr-14">
 						<div className="w-full h-110 mb-4 relative flex justify-center items-center">
-							<Spinner/>
+							<Spinner />
 						</div>
 					</div>
 					<div className="flex flex-col flex-1 mt-8">
@@ -243,7 +263,8 @@ const ProductPage = () => {
 			</>
 		);
 	} else {
-		return <span>error</span>;
+		return <span>{error.message}
+		</span>;
 	}
 };
 

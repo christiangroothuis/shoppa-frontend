@@ -89,49 +89,45 @@ const Nav = () => {
 									{results.length > 0 ? (
 										results.map((result: any) => {
 											return (
-												<>
-													<Link
-														to={`/product/${result.slug}`}
-														className="p-5 flex max-w-full items-center z-10 border-b-2 "
-													>
-														<div className="w-36 h-18 relative flex items-center justify-center">
-															<img
-																className={`object-contain w-full ${
-																	imageLoaded
-																		? `opacity-100`
-																		: `opacity-0`
-																}`}
-																style={{
-																	transitionDuration:
-																		"300ms",
-																}}
-																src={
-																	result
-																		.images[0] &&
-																	result
-																		.images[0]
-																		.image_url !==
-																		null
-																		? result
-																				.images[0]
-																				.image_url
-																		: "https://cdn.discordapp.com/attachments/811000693715370005/811286686675370014/Drip_Placeholder.png"
-																}
-																alt={
-																	result.title
-																}
-																onLoad={() =>
-																	setImageLoaded(
-																		true
-																	)
-																}
-															/>
-														</div>
-														<span className="ml-5 flex-grow text-2-lines w-full">
-															{result.title}
-														</span>
-													</Link>
-												</>
+												<Link
+													key={result.id}
+													to={`/product/${result.slug}`}
+													className="p-5 flex max-w-full items-center z-10 border-b-2 "
+												>
+													<div className="w-36 h-18 relative flex items-center justify-center">
+														<img
+															className={`object-contain w-full ${
+																imageLoaded
+																	? `opacity-100`
+																	: `opacity-0`
+															}`}
+															style={{
+																transitionDuration:
+																	"300ms",
+															}}
+															src={
+																result
+																	.images[0] &&
+																result.images[0]
+																	.image_url !==
+																	null
+																	? result
+																			.images[0]
+																			.image_url
+																	: "https://cdn.discordapp.com/attachments/811000693715370005/811286686675370014/Drip_Placeholder.png"
+															}
+															alt={result.title}
+															onLoad={() =>
+																setImageLoaded(
+																	true
+																)
+															}
+														/>
+													</div>
+													<span className="ml-5 flex-grow text-2-lines w-full">
+														{result.title}
+													</span>
+												</Link>
 											);
 										})
 									) : (
@@ -142,7 +138,11 @@ const Nav = () => {
 								</div>
 							) : (
 								<div className="w-full h-125 flex items-center justify-center px-5">
-									{isError ? "Er was een error bij het ophalen van de zoekresultaten" : <Spinner />}
+									{isError ? (
+										"Er was een error bij het ophalen van de zoekresultaten"
+									) : (
+										<Spinner />
+									)}
 								</div>
 							)}
 						</div>

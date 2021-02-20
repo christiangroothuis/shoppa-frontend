@@ -1,10 +1,44 @@
-import React, { useContext } from "react";
-import { Link, Redirect, useHistory } from "react-router-dom";
+import axios from "axios";
+import { Field, Form, Formik } from "formik";
+import React, { useContext, useEffect, useState } from "react";
+import jwt_decode from "jwt-decode";
+import { Link } from "react-router-dom";
+import { CSSTransition } from "react-transition-group";
+import Modal from "react-modal";
+import * as Yup from "yup";
+import { SignupSchema, LoginSchema } from "./dashboard";
 
 import ShopContext from "../context/shopContext";
+import { API_URL } from "../hooks/api";
+import Spinner from "./spinner";
+import { ReactComponent as X } from "../assets/icons/x.svg";
 
 const ProductCard = () => {
-	const history = useHistory();
+	const [loggedIn, setLoggedIn] = useState(false);
+	const [modalOpen, setmodalOpen] = useState(false);
+	const [modalState, setmodalState] = useState("");
+
+	const [error, setError] = useState("");
+
+	const [showSpinner, setshowSpinner] = useState(false);
+
+	useEffect(() => {
+		if (localStorage.user && JSON.parse(localStorage.user).token) {
+			const decodedToken: any = jwt_decode(
+				JSON.parse(localStorage.user).token
+			);
+
+			if (Date.now() <= decodedToken.exp * 1000) {
+				setLoggedIn(true);
+			}
+		}
+	}, []);
+
+	const OrderSchema = Yup.object().shape({
+		address: Yup.string().max(200, "Te lang!"),
+		postal: Yup.string().max(7, "Te lang!"),
+		city: Yup.string().max(200, "Te lang!"),
+	});
 
 	const context = useContext(ShopContext);
 
@@ -125,9 +159,7 @@ const ProductCard = () => {
 								</div>
 							</div>
 							<button
-								onClick={() => {
-									history.push("/");
-								}}
+								onClick={() => setmodalOpen(true)}
 								className="clickable flex justify-center w-full px-10 py-4 mt-3 font-medium text-white  bg-black rounded-xl text-xl"
 							>
 								Afrekenen
@@ -136,6 +168,341 @@ const ProductCard = () => {
 					</div>
 				</>
 			)}
+			<CSSTransition in={modalOpen} timeout={300} classNames="dialog">
+				<Modal
+					closeTimeoutMS={500}
+					isOpen={modalOpen}
+					className="absolute inset-20 flex justify-center items-center"
+				>
+					<div className="bg-white p-10 rounded-xl border-2 border-gray flex justify-center items-center">
+						<X
+							onClick={() => {
+								setmodalOpen(false);
+								setmodalState("");
+							}}
+							className="mr-6 stroke-2 w-8 h-8 cursor-pointer"
+						/>
+						{modalState === "" && (
+							<>
+								{loggedIn ? (
+									<>
+										<Formik
+											initialValues={{
+												address: "",
+												postal: "",
+												city: "",
+											}}
+											validationSchema={OrderSchema}
+											onSubmit={async (values) => {
+												setshowSpinner(true);
+												try {
+													const res = await axios.post(
+														`${API_URL}/orders/`,
+														{
+															data: {
+																user: values,
+																cart: JSON.parse(
+																	localStorage.cart
+																),
+															},
+														},
+														{
+															headers: {
+																Authorization: `Bearer ${
+																	JSON.parse(
+																		localStorage.user
+																	).token
+																}`,
+															},
+														}
+													);
+													// setshowSpinner(false);
+													console.log(res);
+													if (res.status === 200) {
+														if (res.data.err) {
+															setError(
+																res.data.err
+															);
+														} else
+															localStorage.removeItem(
+																"cart"
+															);
+														window.location.href =
+															res.data.url;
+													}
+												} catch (error) {
+													console.log(error);
+													setshowSpinner(false);
+													setError("Error");
+												}
+											}}
+										>
+											{({ errors, touched }) => (
+												<Form className="w-125 max-w-screen relative">
+													<h2 className="text-2xl font-bold">
+														Afrekenen
+													</h2>
+													<span className="mb-4">
+														(invullen gegevens niet
+														vereist)
+													</span>
+													<div className="text-red-600">
+														{error}
+													</div>
+													<label className="mt-10">
+														Straatnaam en
+														huisnummer:
+														<Field
+															name="address"
+															className="bg-white relative border-2 border-gray p-2.5 px-4 rounded-xl w-full focus:border-blue-500"
+														/>
+													</label>
+													{errors.address &&
+													touched.address ? (
+														<div className="text-red-600">
+															{errors.address}
+														</div>
+													) : null}
+													<label className="mt-10">
+														Postcode:
+														<Field
+															className="bg-white relative border-2 border-gray p-2.5 px-4 rounded-xl w-full focus:border-blue-500"
+															name="postal"
+														/>
+													</label>
+													{errors.postal &&
+													touched.postal ? (
+														<div className="text-red-600">
+															{errors.postal}
+														</div>
+													) : null}
+													<label className="mt-10">
+														Plaats:
+														<Field
+															className="bg-white relative border-2 border-gray p-2.5 px-4 rounded-xl w-full focus:border-blue-500"
+															name="city"
+														/>
+													</label>
+													{errors.city &&
+													touched.city ? (
+														<div className="text-red-600">
+															{errors.city}
+														</div>
+													) : null}
+													<div className="flex items-center justify-between">
+														<button
+															type="submit"
+															className="bg-black text-white px-5 py-4 rounded-xl mt-3 font-bold text-xl"
+														>
+															Afrekenen
+														</button>
+														<span className="text-2xl font-bold">
+															€{totalAmount}
+														</span>
+													</div>
+												</Form>
+											)}
+										</Formik>
+									</>
+								) : (
+									<>
+										<button
+											onClick={() => {
+												setmodalState("login");
+											}}
+											className="bg-black text-white px-5 py-4 rounded-xl mr-5 font-bold text-xl"
+										>
+											Inloggen
+										</button>
+										of
+										<button
+											onClick={() => {
+												setmodalState("register");
+											}}
+											className="bg-black text-white px-5 py-4 rounded-xl ml-5 font-bold text-xl"
+										>
+											Registreren
+										</button>
+									</>
+								)}
+							</>
+						)}
+						{modalState === "register" && (
+							<Formik
+								initialValues={{
+									name: "",
+									email: "",
+									password: "",
+								}}
+								validationSchema={SignupSchema}
+								onSubmit={async (values) => {
+									setshowSpinner(true);
+									try {
+										const res = await axios.post(
+											`${API_URL}/auth/register`,
+											values
+										);
+										setshowSpinner(false);
+										if (res.status === 201) {
+											const user = {
+												token: res.data.token,
+												user: res.data.user,
+											};
+											localStorage.user = JSON.stringify(
+												user
+											);
+											setLoggedIn(true);
+											setmodalState("");
+										}
+									} catch (error) {
+										setshowSpinner(false);
+										setError(
+											"Er trad een fout op bij het registreren"
+										);
+									}
+								}}
+							>
+								{({ errors, touched }) => (
+									<Form className="w-125 max-w-screen relative">
+										<h2 className="text-2xl font-bold mb-4">
+											Registreren
+										</h2>
+										<div className="text-red-600">
+											{error}
+										</div>
+										<label className="mt-10">
+											Naam (Minimaal 4 karakters):
+											<Field
+												name="name"
+												className="bg-white relative border-2 border-gray p-2.5 px-4 rounded-xl w-full focus:border-blue-500"
+											/>
+										</label>
+										{errors.name && touched.name ? (
+											<div className="text-red-600">
+												{errors.name}
+											</div>
+										) : null}
+										<label className="mt-10">
+											E-mail:
+											<Field
+												name="email"
+												type="email"
+												className="bg-white relative border-2 border-gray p-2.5 px-4 rounded-xl w-full focus:border-blue-500"
+											/>
+										</label>
+										{errors.email && touched.email ? (
+											<div className="text-red-600">
+												{errors.email}
+											</div>
+										) : null}
+										<label className="mt-10">
+											Wachtwoord (Minimaal 6 karakters):
+											<Field
+												className="bg-white relative border-2 border-gray p-2.5 px-4 rounded-xl w-full focus:border-blue-500"
+												name="password"
+												type="password"
+											/>
+										</label>
+										{errors.password && touched.password ? (
+											<div className="text-red-600">
+												{errors.password}
+											</div>
+										) : null}
+										<button
+											type="submit"
+											className="bg-black text-white px-5 py-4 rounded-xl mt-3 font-bold text-xl"
+										>
+											Account aanmaken
+										</button>
+									</Form>
+								)}
+							</Formik>
+						)}
+						{modalState === "login" && (
+							<Formik
+								initialValues={{
+									email: "",
+									password: "",
+								}}
+								validationSchema={LoginSchema}
+								onSubmit={async (values) => {
+									setshowSpinner(true);
+									try {
+										const res = await axios.post(
+											`${API_URL}/auth/login`,
+											values
+										);
+										setshowSpinner(false);
+										if (res.status === 200) {
+											const user = {
+												token: res.data.access_token,
+												user: res.data.user,
+											};
+											localStorage.user = JSON.stringify(
+												user
+											);
+											setLoggedIn(true);
+											setmodalState("");
+										}
+									} catch (error) {
+										setshowSpinner(false);
+										setError("Onjuiste inlogdata");
+									}
+								}}
+							>
+								{({ errors, touched }) => (
+									<Form className="w-125 max-w-screen relative">
+										<h2 className="text-2xl font-bold mb-4">
+											Inloggen
+										</h2>
+										<div className="text-red-600">
+											{error}
+										</div>
+										<label className="mt-10">
+											E-mail:
+											<Field
+												name="email"
+												type="email"
+												className="bg-white relative border-2 border-gray p-2.5 px-4 rounded-xl w-full focus:border-blue-500"
+											/>
+										</label>
+										{errors.email && touched.email ? (
+											<div className="text-red-600">
+												{errors.email}
+											</div>
+										) : null}
+										<label className="mt-10">
+											Wachtwoord:
+											<Field
+												className="bg-white relative border-2 border-gray p-2.5 px-4 rounded-xl w-full focus:border-blue-500"
+												name="password"
+												type="password"
+											/>
+										</label>
+										{errors.password && touched.password ? (
+											<div className="text-red-600">
+												{errors.password}
+											</div>
+										) : null}
+										<button
+											type="submit"
+											className="bg-black text-white px-5 py-4 rounded-xl mt-3 font-bold text-xl"
+										>
+											Inloggen
+										</button>
+									</Form>
+								)}
+							</Formik>
+						)}
+
+						{showSpinner && (
+							<div className="absolute w-full h-full bg-white flex justify-center items-center rounded-xl">
+								<Spinner />
+							</div>
+						)}
+					</div>
+				</Modal>
+			</CSSTransition>
 		</div>
 	);
 };
