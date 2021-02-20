@@ -42,7 +42,7 @@ const CardSection = () => {
 						))}
 					</div>
 				) : isError ? (
-					<pre>{JSON.stringify(error)}</pre>
+					<div>{JSON.stringify(error)}</div>
 				) : (
 					<>
 						<div>
