@@ -42,7 +42,7 @@ function App() {
 								<ProductPage />
 							</Route>
 							<Route path="/over"><Info/></Route>
-							<Route path="/return" exact>
+							<Route path="/return">
 								<Return />
 							</Route>
 						</Switch>
