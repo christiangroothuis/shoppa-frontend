@@ -1,4 +1,4 @@
-import { ReactComponent as Download } from "../assets/icons/download.svg";
+import { ReactComponent as Download } from "../assets/icons/external-link.svg";
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -24,31 +24,31 @@ const Info = () => {
                 <Link
                     to="/"
                     className="clickable flex justify-center mr-5 px-10 py-4 mt-3 w-88 font-medium text-white  bg-black rounded-xl text-xl"
-                ><Download className="mr-2" />Projectplan</Link>
+                >Projectplan<Download className="ml-2" /></Link>
                 <Link
                     to="/"
                     className="clickable flex justify-center mr-5 px-10 py-4 mt-3 w-88 font-medium text-white  bg-black rounded-xl text-xl"
-                ><Download className="mr-2" />SRD</Link>
+                >SRD<Download className="ml-2" /></Link>
                 <Link
                     to="/"
                     className="clickable flex justify-center mr-5 px-10 py-4 mt-3 w-88 font-medium text-white  bg-black rounded-xl text-xl"
-                ><Download className="mr-2" />Designdocument</Link>
+                >Designdocument<Download className="ml-2" /></Link>
                 <Link
                     to="/"
                     className="clickable flex justify-center mr-5 px-10 py-4 mt-3 w-88 font-medium text-white  bg-black rounded-xl text-xl"
-                ><Download className="mr-2" />Databasedocument</Link>
+                >Databasedocument<Download className="ml-2" /></Link>
                 <Link
                     to="/"
                     className="clickable flex justify-center mr-5 px-10 py-4 mt-3 w-88 font-medium text-white  bg-black rounded-xl text-xl"
-                ><Download className="mr-2" />Planning & Taakverdeling</Link>
+                >Planning & Taakverdeling<Download className="ml-2" /></Link>
                 <Link
                     to="/"
                     className="clickable flex justify-center mr-5 px-10 py-4 mt-3 w-88 font-medium text-white  bg-black rounded-xl text-xl"
-                ><Download className="mr-2" />Logboeken</Link>
+                >Logboeken<Download className="ml-2" /></Link>
                 <Link
                     to="/"
                     className="clickable flex justify-center mr-5 px-10 py-4 mt-3 w-88 font-medium text-white  bg-black rounded-xl text-xl"
-                ><Download className="mr-2" />Testrapporten</Link>
+                >Testrapporten<Download className="ml-2" /></Link>
             </div>
         </div>
     );
