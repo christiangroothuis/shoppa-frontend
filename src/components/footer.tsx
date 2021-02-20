@@ -1,3 +1,5 @@
+import React from "react";
+import { Link } from "react-router-dom";
 import Container from "./container";
 
 const Footer = ({ className }: { className?: string }) => {
@@ -12,7 +14,7 @@ const Footer = ({ className }: { className?: string }) => {
 					Drip 2021
 				</div>
 				<span className="text-5xl font-bold ">DRIP</span>
-				<div className="underline cursor-pointer">Disclaimer</div>
+				<Link to="/over#disclaimer" className="underline cursor-pointer">Disclaimer</Link>
 			</Container>
 		</footer>
 	);

@@ -216,19 +216,29 @@ const ProductCard = () => {
 															},
 														}
 													);
-													// setshowSpinner(false);
 													console.log(res);
 													if (res.status === 200) {
 														if (res.data.err) {
+															setshowSpinner(
+																false
+															);
 															setError(
 																res.data.err
 															);
-														} else
+														} else if (
+															res.data.url
+														) {
 															localStorage.removeItem(
 																"cart"
 															);
-														window.location.href =
-															res.data.url;
+															window.location.href =
+																res.data.url;
+														} else {
+															setshowSpinner(
+																false
+															);
+															setError("Error");
+														}
 													}
 												} catch (error) {
 													console.log(error);
