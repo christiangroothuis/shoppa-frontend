@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import useDataApi from "../hooks/api";
 import jwt_decode from "jwt-decode";
@@ -89,9 +89,9 @@ const ProductPage = () => {
 				{showEditButtons && (
 					<div className="flex justify-end fixed left-0 w-full top-22 mx-auto z-20">
 						<Container className="flex justify-end w-full">
-							<button className="clickable cursor-pointer flex justify-center items-center bg-white rounded-full w-14 h-14 mr-2">
+							<Link to={`/product/${slug}/edit`} className="clickable cursor-pointer flex justify-center items-center bg-white rounded-full w-14 h-14 mr-2">
 								<Edit />
-							</button>
+							</Link>
 							<button className="clickable cursor-pointer flex justify-center items-center bg-white rounded-full w-14 h-14 text-red-500">
 								<TrashCan />
 							</button>

@@ -7,6 +7,8 @@ import { Formik, Form, Field } from "formik";
 import axios from "axios";
 import { API_URL } from "../hooks/api";
 import Spinner from "./spinner";
+import OrderTable from "./orderTable";
+import AccountInfo from "./accountInfo";
 
 Modal.setAppElement("#root");
 
@@ -57,8 +59,8 @@ const Dashboard = () => {
 
 	return (
 		<div>
-			<div className="flex justify-between">
-				<h1 className="text-5xl font-bold mb-5">Dashboard</h1>
+			<div className="flex justify-between mb-5">
+				<h1 className="text-5xl font-bold ">Dashboard</h1>
 				<button
 					onClick={() => {
 						localStorage.removeItem("user");
@@ -71,7 +73,31 @@ const Dashboard = () => {
 					Uitloggen
 				</button>
 			</div>
-			{loggedIn && <div>{JSON.parse(localStorage.user).user.name}</div>}
+			{/* {JSON.parse(localStorage.user).user.name}  */}
+			{loggedIn && (
+				<div>
+					<div className="">
+						<h2 className="font-bold text-2xl">Accountinfo</h2>
+						<AccountInfo/>
+					</div>
+					
+					{JSON.parse(localStorage.user).user.role !== "admin" ? (
+						<>
+							<h2 className="font-bold text-2xl mt-10">
+								Jouw bestellingen
+								<OrderTable />
+							</h2>
+						</>
+					) : (
+						<>
+							<h2 className="font-bold text-2xl mt-10">
+								Alle bestellingen
+								<OrderTable />
+							</h2>
+						</>
+					)}
+				</div>
+			)}
 			<CSSTransition in={modalOpen} timeout={300} classNames="dialog">
 				<Modal
 					closeTimeoutMS={500}

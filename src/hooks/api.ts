@@ -8,6 +8,7 @@ export const API_URL = "http://5620fd30912c.ngrok.io/api"
 
 const useDataApi = (
 	initialUrl: string,
+	token: string = "",
 	initialData?: any,
 	method: string = "get"
 ): [
@@ -19,7 +20,6 @@ const useDataApi = (
 	},
 	React.Dispatch<React.SetStateAction<string>>
 ] => {
-
 	// const CancelToken = axios.CancelToken;
 	// const source = CancelToken.source();
 
@@ -38,6 +38,9 @@ const useDataApi = (
 				const result = await axios({
 					method: "GET",
 					url: API_URL + url,
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
 					// cancelToken: source.token,
 					// data: { firstName: "Fred", lastName: "Flintstone" },
 				});

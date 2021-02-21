@@ -15,6 +15,8 @@ import GlobalState from "./context/globalState";
 
 import "./styles/output.css";
 import Info from "./components/info";
+import ProductPageEdit from "./components/productPageEdit";
+import OrderPage from "./components/orderPage";
 
 function App() {
 	return (
@@ -38,10 +40,18 @@ function App() {
 							<Route path="/dashboard/" exact>
 								<Dashboard />
 							</Route>
-							<Route path="/product/:productId">
+							<Route exact path="/product/:productId">
 								<ProductPage />
 							</Route>
-							<Route path="/over"><Info/></Route>
+							<Route exact path="/order/:orderId">
+								<OrderPage />
+							</Route>
+							<Route path="/product/:productId/edit">
+								<ProductPageEdit />
+							</Route>
+							<Route path="/over">
+								<Info />
+							</Route>
 							<Route path="/return">
 								<Return />
 							</Route>
