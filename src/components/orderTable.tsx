@@ -8,10 +8,10 @@ const OrderTable = ({ className }: { className?: string }) => {
 	const [{ data, isLoading, isError, error }, doFetch]: [
 		{ data: any; isLoading: boolean; isError: boolean; error: any },
 		any
-	] = useDataApi(`/orders/`, JSON.parse(localStorage.user).token);
+	] = useDataApi(`/orders`, JSON.parse(localStorage.user).token);
 
 	useEffect(() => {
-		doFetch(`/orders/`, JSON.parse(localStorage.user).token);
+		doFetch(`/orders`, JSON.parse(localStorage.user).token);
 	}, [doFetch]);
 
 	console.log(data);
