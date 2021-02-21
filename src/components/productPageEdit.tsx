@@ -176,66 +176,64 @@ const ProductPageEdit = () => {
 								},
 							});
 
-							// console.log(id)
+							if (imageChanged) {
+								await axios.delete(`${API_URL}/images/${id}`, {
+									headers: {
+										Authorization: `Bearer ${
+											JSON.parse(localStorage.user).token
+										}`,
+									},
+								});
 
-							// if (5 == 5) {
-							await axios.delete(`${API_URL}/images/${id}`, {
-								headers: {
-									Authorization: `Bearer ${
-										JSON.parse(localStorage.user).token
-									}`,
-								},
-							});
+								console.log(formImages);
 
-							console.log(formImages);
-							formImages.forEach(
-								async (image: any, i: number) => {
-									// if (image.image_url) {
-									let data = new FormData();
+								formImages.forEach(
+									async (image: any, i: number) => {
+										// if (image.image_url) {
+										let data = new FormData();
 
-									let file: any = await fetch(image.image_url)
-										.then((r) => r.blob())
-										// .then((res)	 => console.log(res))
-										.then(
-											(blobFile) =>
-												new File(
-													[blobFile],
-													`${id}--:-+${i + 1}.${
-														blobFile.type.split(
-															"/"
-														)[1]
+										let file: any = await fetch(
+											image.image_url
+										)
+											.then((r) => r.blob())
+											// .then((res)	 => console.log(res))
+											.then(
+												(blobFile) =>
+													new File(
+														[blobFile],
+														`${id}--:-+${i + 1}.${
+															blobFile.type.split(
+																"/"
+															)[1]
+														}`,
+														{
+															type: blobFile.type,
+														}
+													)
+											);
+
+										console.log(file);
+
+										data.append("image", file);
+
+										axios
+											.post(`${API_URL}/images`, data, {
+												headers: {
+													Authorization: `Bearer ${
+														JSON.parse(
+															localStorage.user
+														).token
 													}`,
-													{
-														type: blobFile.type,
-													}
-												)
-										);
-
-									console.log(file);
-
-									data.append("image", file);
-
-									axios
-										.post(`${API_URL}/images`, data, {
-											headers: {
-												Authorization: `Bearer ${
-													JSON.parse(
-														localStorage.user
-													).token
-												}`,
-												accept: "application/json",
-												"Accept-Language":
-													"en-US,en;q=0.8",
-												"Content-Type": `multipart/form-data;`,
-											},
-										})
-										// .then((res) => console.log(res))
-										.catch((err) => console.log(err));
-									// }
-								}
-							);
-							// }
-							console.log("bruh");
+													accept: "application/json",
+													"Accept-Language":
+														"en-US,en;q=0.8",
+													"Content-Type": `multipart/form-data;`,
+												},
+											})
+											.catch((err) => console.log(err));
+									}
+								);
+							}
 							setshowSpinner(false);
 						} catch (error) {
 							setshowSpinner(false);
