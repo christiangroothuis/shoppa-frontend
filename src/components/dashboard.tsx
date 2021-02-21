@@ -86,12 +86,14 @@ const Dashboard = () => {
 						<>
 							<h2 className="font-bold text-2xl mt-10">
 								Jouw bestellingen
-								<OrderTable />
 							</h2>
+							<OrderTable />
 						</>
 					) : (
 						<>
-							<h2 className="text-2xl font-bold mt-10">Categorieën</h2>
+							<h2 className="text-2xl font-bold mt-10">
+								Categorieën
+							</h2>
 							<DashboardCat />
 							<h2 className="font-bold text-2xl mt-10">
 								Alle bestellingen
