@@ -37,7 +37,9 @@ const OrderTable = ({ className }: { className?: string }) => {
 					{data.data.map((order: any, i: number) => {
 						let totalAmount = order.items.reduce(
 							(acc: number, cur: any) => {
-								return acc + cur.product.price * cur.amount;
+								if (cur.product)
+									return acc + cur.product.price * cur.amount;
+								else return acc;
 							},
 							0
 						);

@@ -5,17 +5,46 @@ import { ReactComponent as X } from "../assets/icons/x.svg";
 import axios from "axios";
 
 const DashboardCat = ({ className }: { className?: string }) => {
-	const [{ data, isLoading, isError, error }, doFetch] = useDataApi(
-		`/categories`
-	);
+	// const [{ data, isLoading, isError, error }, doFetch] = useDataApi(
+	// 	`/categories`
+	// );
+
+	const [data, setData] = useState([]);
+	const [isLoading, setIsLoading] = useState(true);
+	const [isError, setIsError] = useState(false);
+	const [error, setError] = useState({});
 
 	const [showSpinner, setshowSpinner] = useState(false);
 
 	const [newCategory, setnewCategory] = useState("");
 
+    const [update, setupdate] = useState(0);
+
 	useEffect(() => {
-		doFetch("/categories");
-	}, [doFetch]);
+        const fetchData = async () => {
+			setIsError(false);
+			setIsLoading(true);
+
+			try {
+				const result = await axios({
+					method: "GET",
+					url: API_URL + '/categories',
+					// cancelToken: source.token,
+					// data: { firstName: "Fred", lastName: "Flintstone" },
+				});
+
+				setData(result.data);
+			} catch (error) {
+				setIsError(true);
+				setError(error);
+			}
+			setIsLoading(false);
+		};
+
+		fetchData();
+
+		// doFetch("/categories");
+	}, [update]);
 
 	return (
 		<div className={`${className}`}>
@@ -24,7 +53,7 @@ const DashboardCat = ({ className }: { className?: string }) => {
 					<Spinner className="w-8 h-8" />
 				</div>
 			) : (
-				<>
+				<div className="relative">
 					{isError ? (
 						<div className="whitespace-pre-wrap overflow-scroll">
 							{JSON.stringify(error)}
@@ -37,7 +66,7 @@ const DashboardCat = ({ className }: { className?: string }) => {
 								</div>
 							)}
 
-							<div className={`${showSpinner && 'opacity-20'}`}>
+							<div className={`${showSpinner && "opacity-20"}`}>
 								<ul>
 									{data.map((category: any, i: number) => (
 										<li
@@ -49,20 +78,23 @@ const DashboardCat = ({ className }: { className?: string }) => {
 												onClick={async () => {
 													setshowSpinner(true);
 
-													await axios.delete(
-														`${API_URL}/categories/${category.id}`,
-														{
-															headers: {
-																Authorization: `Bearer ${
-																	JSON.parse(
-																		localStorage.user
-																	).token
-																}`,
-															},
-														}
-													);
-													setshowSpinner(false);
-													doFetch("/categories");
+													try {
+														await axios.delete(
+															`${API_URL}/categories/${category.id}`,
+															{
+																headers: {
+																	Authorization: `Bearer ${
+																		JSON.parse(
+																			localStorage.user
+																		).token
+																	}`,
+																},
+															}
+														);
+                                                        setupdate(update+1)
+														// doFetch("/categories");
+														setshowSpinner(false);
+													} catch (error) {}
 												}}
 												className="w-8 h-8 text-red-600 cursor-pointer"
 											/>
@@ -96,7 +128,8 @@ const DashboardCat = ({ className }: { className?: string }) => {
 											);
 
 											setshowSpinner(false);
-											doFetch("/categories");
+                                            setnewCategory('')
+											setupdate(update+1)
 										} else {
 											alert("Categorie vereist");
 										}
@@ -108,7 +141,7 @@ const DashboardCat = ({ className }: { className?: string }) => {
 							</div>
 						</>
 					)}
-				</>
+				</div>
 			)}
 		</div>
 	);

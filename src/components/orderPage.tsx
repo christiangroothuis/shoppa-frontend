@@ -16,7 +16,8 @@ const OrderPage = () => {
 	}, [doFetch]);
 
 	let totalAmount = data?.data?.items.reduce((acc: number, cur: any) => {
-		return acc + cur.product.price * cur.amount;
+		if (cur.product) return acc + cur.product.price * cur.amount;
+		else return acc;
 	}, 0);
 
 	const date = new Date(data?.data?.created_at);
@@ -46,49 +47,56 @@ const OrderPage = () => {
 				</thead>
 				<tbody>
 					{data.data.items.map((item: any) => {
-						return (
-							<tr key={item.slug}>
-								<td className="flex align-center pb-4">
-									<Link to={`/product/${item.product.slug}`}>
-										<div className="bg-white rounded-lg h-24 w-24 p-2 flex justify-center items-center">
-											{item.product.images[0] && (
-												<img
-													src={
-														item.product.images[0]
-															.image_url
-													}
-													className="w-full h-full rounded object-contain"
-													alt={item.product.title}
-												/>
-											)}
-										</div>
-									</Link>
-									<div className="ml-4 flex flex-col justify-center">
+						if (!item.product) {
+							return <tr></tr>;
+						} else {
+							return (
+								<tr key={item.slug}>
+									<td className="flex align-center pb-4">
 										<Link
 											to={`/product/${item.product.slug}`}
-											className="mb-1 hover:underline text-lg"
 										>
-											<span className="text-2-lines">
-												{item.product.title}
-											</span>
+											<div className="bg-white rounded-lg h-24 w-24 p-2 flex justify-center items-center">
+												{item.product.images[0] && (
+													<img
+														src={
+															item.product
+																.images[0]
+																.image_url
+														}
+														className="w-full h-full rounded object-contain"
+														alt={item.product.title}
+													/>
+												)}
+											</div>
 										</Link>
-									</div>
-								</td>
-								<td className="text-right">
-									<span className="text-sm lg:text-base font-medium">
-										€{item.product.price}
-									</span>
-								</td>
-								<td className="text-right font-medium">
-									{item.amount}
-								</td>
-								<td className="text-right">
-									<span className="text-base font-medium">
-										€{item.product.price * item.amount}
-									</span>
-								</td>
-							</tr>
-						);
+										<div className="ml-4 flex flex-col justify-center">
+											<Link
+												to={`/product/${item.product.slug}`}
+												className="mb-1 hover:underline text-lg"
+											>
+												<span className="text-2-lines">
+													{item.product.title}
+												</span>
+											</Link>
+										</div>
+									</td>
+									<td className="text-right">
+										<span className="text-sm lg:text-base font-medium">
+											€{item.product.price}
+										</span>
+									</td>
+									<td className="text-right font-medium">
+										{item.amount}
+									</td>
+									<td className="text-right">
+										<span className="text-base font-medium">
+											€{item.product.price * item.amount}
+										</span>
+									</td>
+								</tr>
+							);
+						}
 					})}
 				</tbody>
 			</table>
