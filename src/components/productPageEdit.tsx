@@ -109,15 +109,38 @@ const ProductPageEdit = () => {
 				{showEditButtons && (
 					<div className="flex justify-end fixed left-0 w-full top-22 mx-auto z-20">
 						<Container className="flex justify-end w-full">
+							<button
+								onClick={async () => {
+									setshowSpinner(true);
+									try {
+										await axios.delete(
+											`${API_URL}/products/${id}`,
+											{
+												headers: {
+													Authorization: `Bearer ${
+														JSON.parse(
+															localStorage.user
+														).token
+													}`,
+												},
+											}
+										);
+										history.push("/");
+									} catch (error) {
+										setshowSpinner(false);
+										setformError(error);
+									}
+								}}
+								className="clickable cursor-pointer flex justify-center items-center bg-white rounded-full w-14 h-14 text-red-500 mr-2"
+							>
+								<TrashCan />
+							</button>
 							<Link
 								to={`/product/${slug}`}
-								className="clickable cursor-pointer flex justify-center items-center bg-white rounded-full w-14 h-14 mr-2"
+								className="clickable cursor-pointer flex justify-center items-center bg-white rounded-full w-14 h-14"
 							>
 								<Check className="w-1/2 stroke-3" />
 							</Link>
-							<button className="clickable cursor-pointer flex justify-center items-center bg-white rounded-full w-14 h-14 text-red-500">
-								<TrashCan />
-							</button>
 						</Container>
 					</div>
 				)}
@@ -126,7 +149,6 @@ const ProductPageEdit = () => {
 					<div className="fixed top-0 left-0 bg-white bg-opacity-80 w-full h-full z-20 flex items-center justify-center">
 						<div className="flex flex-col items-center">
 							<Spinner />
-							<span className="mt-5 text-xl">Uploaden...</span>
 						</div>
 					</div>
 				)}
@@ -157,63 +179,61 @@ const ProductPageEdit = () => {
 							// console.log(id)
 
 							// if (5 == 5) {
-								await axios.delete(`${API_URL}/images/${id}`, {
-									headers: {
-										Authorization: `Bearer ${
-											JSON.parse(localStorage.user).token
-										}`,
-									},
-								});
+							await axios.delete(`${API_URL}/images/${id}`, {
+								headers: {
+									Authorization: `Bearer ${
+										JSON.parse(localStorage.user).token
+									}`,
+								},
+							});
 
-								console.log(formImages);
-								formImages.forEach(
-									async (image: any, i: number) => {
-										// if (image.image_url) {
-										let data = new FormData();
+							console.log(formImages);
+							formImages.forEach(
+								async (image: any, i: number) => {
+									// if (image.image_url) {
+									let data = new FormData();
 
-										let file: any = await fetch(
-											image.image_url
-										)
-											.then((r) => r.blob())
-											// .then((res)	 => console.log(res))
-											.then(
-												(blobFile) =>
-													new File(
-														[blobFile],
-														`${id}--:-+${i + 1}.${
-															blobFile.type.split(
-																"/"
-															)[1]
-														}`,
-														{
-															type: blobFile.type,
-														}
-													)
-											);
-
-										console.log(file);
-
-										data.append("image", file);
-
-										axios
-											.post(`${API_URL}/images`, data, {
-												headers: {
-													Authorization: `Bearer ${
-														JSON.parse(
-															localStorage.user
-														).token
+									let file: any = await fetch(image.image_url)
+										.then((r) => r.blob())
+										// .then((res)	 => console.log(res))
+										.then(
+											(blobFile) =>
+												new File(
+													[blobFile],
+													`${id}--:-+${i + 1}.${
+														blobFile.type.split(
+															"/"
+														)[1]
 													}`,
-													accept:
-														"application/json",
-													"Accept-Language": "en-US,en;q=0.8",
-													"Content-Type": `multipart/form-data;`,
-												},
-											})
-											// .then((res) => console.log(res))
-											.catch((err) => console.log(err));
-										// }
-									}
-								);
+													{
+														type: blobFile.type,
+													}
+												)
+										);
+
+									console.log(file);
+
+									data.append("image", file);
+
+									axios
+										.post(`${API_URL}/images`, data, {
+											headers: {
+												Authorization: `Bearer ${
+													JSON.parse(
+														localStorage.user
+													).token
+												}`,
+												accept: "application/json",
+												"Accept-Language":
+													"en-US,en;q=0.8",
+												"Content-Type": `multipart/form-data;`,
+											},
+										})
+										// .then((res) => console.log(res))
+										.catch((err) => console.log(err));
+									// }
+								}
+							);
 							// }
 							console.log("bruh");
 							setshowSpinner(false);

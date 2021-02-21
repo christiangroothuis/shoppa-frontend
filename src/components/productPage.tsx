@@ -8,7 +8,6 @@ import range from "../utils/range";
 import ProductCard from "./productCard";
 import Container from "./container";
 
-import { ReactComponent as TrashCan } from "../assets/icons/trash-2.svg";
 import { ReactComponent as Edit } from "../assets/icons/edit-3.svg";
 import { ReactComponent as Check } from "../assets/icons/check.svg";
 
@@ -92,9 +91,6 @@ const ProductPage = () => {
 							<Link to={`/product/${slug}/edit`} className="clickable cursor-pointer flex justify-center items-center bg-white rounded-full w-14 h-14 mr-2">
 								<Edit />
 							</Link>
-							<button className="clickable cursor-pointer flex justify-center items-center bg-white rounded-full w-14 h-14 text-red-500">
-								<TrashCan />
-							</button>
 						</Container>
 					</div>
 				)}

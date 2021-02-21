@@ -9,6 +9,7 @@ import { API_URL } from "../hooks/api";
 import Spinner from "./spinner";
 import OrderTable from "./orderTable";
 import AccountInfo from "./accountInfo";
+import DashboardCat from "./dashboardCat";
 
 Modal.setAppElement("#root");
 
@@ -78,9 +79,9 @@ const Dashboard = () => {
 				<div>
 					<div className="">
 						<h2 className="font-bold text-2xl">Accountinfo</h2>
-						<AccountInfo/>
+						<AccountInfo />
 					</div>
-					
+
 					{JSON.parse(localStorage.user).user.role !== "admin" ? (
 						<>
 							<h2 className="font-bold text-2xl mt-10">
@@ -90,10 +91,12 @@ const Dashboard = () => {
 						</>
 					) : (
 						<>
+							<h2 className="text-2xl font-bold mt-10">Categorieën</h2>
+							<DashboardCat />
 							<h2 className="font-bold text-2xl mt-10">
 								Alle bestellingen
-								<OrderTable />
 							</h2>
+							<OrderTable />
 						</>
 					)}
 				</div>
