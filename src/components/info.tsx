@@ -89,8 +89,6 @@ const Info = () => {
 				</a>
 			</div>
 			<br></br>
-			<br></br>
-			<br></br>
 			<h1 id="disclaimer" className="text-5xl font-bold mb-5">
 				Disclaimer
 			</h1>
