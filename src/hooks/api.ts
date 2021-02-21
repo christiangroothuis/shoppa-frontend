@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 // export const API_URL = "http://localhost:8000/api";
-export const API_URL = "http://5620fd30912c.ngrok.io/api"
+// export const API_URL = "http://5620fd30912c.ngrok.io/api"
 // export const API_URL = "https://shoppa-backend-v2.herokuapp.com/api";
-// export const API_URL = "http://informatica.gymnasiumbreda.nl/informatica/leerlingenwebsites/IN2021/ProjectWebsites/Drip/backend/public/api";
+export const API_URL = "http://informatica.gymnasiumbreda.nl/informatica/leerlingenwebsites/IN2021/ProjectWebsites/Drip/backend/public/api";
 
 const useDataApi = (
 	initialUrl: string,

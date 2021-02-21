@@ -168,7 +168,7 @@ const ProductPageEdit = () => {
 					onSubmit={async (values) => {
 						setshowSpinner(true);
 						try {
-							await axios.put(`${API_URL}/products/`, values, {
+							await axios.put(`${API_URL}/products`, values, {
 								headers: {
 									Authorization: `Bearer ${
 										JSON.parse(localStorage.user).token

@@ -197,7 +197,7 @@ const ProductCard = () => {
 												setshowSpinner(true);
 												try {
 													const res = await axios.post(
-														`${API_URL}/orders/`,
+														`${API_URL}/orders`,
 														{
 															data: {
 																user: values,

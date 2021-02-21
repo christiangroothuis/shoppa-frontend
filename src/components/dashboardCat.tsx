@@ -121,7 +121,7 @@ const DashboardCat = ({ className }: { className?: string }) => {
 
 										if (newCategory.length > 0) {
 											await axios.post(
-												`${API_URL}/categories/`,
+												`${API_URL}/categories`,
 												{
 													name: newCategory,
 												}
