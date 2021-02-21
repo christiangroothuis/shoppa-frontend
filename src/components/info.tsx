@@ -27,7 +27,7 @@ const Info = () => {
 				<a
 					target="_blank"
 					rel="noreferrer"
-					href="http://informatica.gymnasiumbreda.nl/informatica/leerlingenwebsites/IN2021/ProjectWebsites/Drip/backend/public/documenten/"
+					href="http://informatica.gymnasiumbreda.nl/informatica/leerlingenwebsites/IN2021/ProjectWebsites/Drip/backend/public/documenten/Projectplan.docx"
 					className="clickable flex justify-center mr-5 px-10 py-4 mt-3 w-88 font-medium text-white  bg-black rounded-xl text-xl"
 				>
 					Projectplan
@@ -36,7 +36,7 @@ const Info = () => {
 				<a
 					target="_blank"
 					rel="noreferrer"
-					href="/"
+					href="http://informatica.gymnasiumbreda.nl/informatica/leerlingenwebsites/IN2021/ProjectWebsites/Drip/backend/public/documenten/SRD.docx"
 					className="clickable flex justify-center mr-5 px-10 py-4 mt-3 w-88 font-medium text-white  bg-black rounded-xl text-xl"
 				>
 					SRD
@@ -45,7 +45,7 @@ const Info = () => {
 				<a
 					target="_blank"
 					rel="noreferrer"
-					href="/"
+					href="http://informatica.gymnasiumbreda.nl/informatica/leerlingenwebsites/IN2021/ProjectWebsites/Drip/backend/public/documenten/Designdocument.pdf"
 					className="clickable flex justify-center mr-5 px-10 py-4 mt-3 w-88 font-medium text-white  bg-black rounded-xl text-xl"
 				>
 					Designdocument
@@ -54,7 +54,7 @@ const Info = () => {
 				<a
 					target="_blank"
 					rel="noreferrer"
-					href="/"
+					href="http://informatica.gymnasiumbreda.nl/informatica/leerlingenwebsites/IN2021/ProjectWebsites/Drip/backend/public/documenten/database_ontwerp.jpg"
 					className="clickable flex justify-center mr-5 px-10 py-4 mt-3 w-88 font-medium text-white  bg-black rounded-xl text-xl"
 				>
 					Databasedocument
@@ -63,7 +63,7 @@ const Info = () => {
 				<a
 					target="_blank"
 					rel="noreferrer"
-					href="/"
+					href="http://informatica.gymnasiumbreda.nl/informatica/leerlingenwebsites/IN2021/ProjectWebsites/Drip/backend/public/documenten/Planning_en_Taakverdeling.xlsx"
 					className="clickable flex justify-center mr-5 px-10 py-4 mt-3 w-88 font-medium text-white  bg-black rounded-xl text-xl"
 				>
 					Planning & Taakverdeling
@@ -72,7 +72,7 @@ const Info = () => {
 				<a
 					target="_blank"
 					rel="noreferrer"
-					href="/"
+					href="http://informatica.gymnasiumbreda.nl/informatica/leerlingenwebsites/IN2021/ProjectWebsites/Drip/backend/public/documenten/Logboeken_dripshoppa.xlsx"
 					className="clickable flex justify-center mr-5 px-10 py-4 mt-3 w-88 font-medium text-white  bg-black rounded-xl text-xl"
 				>
 					Logboeken
@@ -81,7 +81,7 @@ const Info = () => {
 				<a
 					target="_blank"
 					rel="noreferrer"
-					href="/"
+					href="http://informatica.gymnasiumbreda.nl/informatica/leerlingenwebsites/IN2021/ProjectWebsites/Drip/backend/public/documenten/Testrapporten-DRIP.docx"
 					className="clickable flex justify-center mr-5 px-10 py-4 mt-3 w-88 font-medium text-white  bg-black rounded-xl text-xl"
 				>
 					Testrapporten
