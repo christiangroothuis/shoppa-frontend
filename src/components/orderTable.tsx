@@ -14,7 +14,6 @@ const OrderTable = ({ className }: { className?: string }) => {
 		doFetch(`/orders`, JSON.parse(localStorage.user).token);
 	}, [doFetch]);
 
-	console.log(data);
 	return !isLoading && !isError ? (
 		<div className={`container ${className || ""}`}>
 			<table className="mt-4 w-full text-base ">
@@ -75,7 +74,6 @@ const OrderTable = ({ className }: { className?: string }) => {
 								)}
 								<td className="text-right">{formattedDate}</td>
 								<td className="text-right">€{totalAmount}</td>
-								<hr />
 							</tr>
 						);
 					})}

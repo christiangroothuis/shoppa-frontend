@@ -69,7 +69,12 @@ const Nav = () => {
 					<NavLink to="/producten" className="nav-item">
 						Producten
 					</NavLink>
-					<a className="nav-item bg-black text-white hover:bg-gray-500" href="http://informatica.gymnasiumbreda.nl/informatica/leerlingenwebsites/IN2021/ProjectWebsites/Drip/backend/public/documenten/DRIP-Handleiding.pdf" target="_blank" rel="noreferrer">
+					<a
+						className="nav-item bg-black text-white hover:bg-gray-500"
+						href="http://informatica.gymnasiumbreda.nl/informatica/leerlingenwebsites/IN2021/ProjectWebsites/Drip/backend/public/documenten/DRIP-Handleiding.pdf"
+						target="_blank"
+						rel="noreferrer"
+					>
 						Help
 					</a>
 				</div>
@@ -82,6 +87,9 @@ const Nav = () => {
 						ref={inputRef}
 						onChange={onChange}
 						value={query}
+						autoCorrect="off"
+						autoCapitalize="off"
+						spellCheck="false"
 						className="bg-white relative border-2 border-gray p-2.5 px-4 rounded-xl w-full focus:border-blue-500 z-40"
 						placeholder="Zoek naar merken, producten..."
 					/>

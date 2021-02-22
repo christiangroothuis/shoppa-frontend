@@ -21,9 +21,10 @@ const ProductPage = () => {
 	const cart = context.cart;
 	const { productId }: { productId: string } = useParams();
 
-	const [{ data, isLoading, isError, error }, doFetch]:[{data:any, isLoading:boolean, isError:boolean, error:any},any] = useDataApi(
-		`/products/${productId}`
-	);
+	const [{ data, isLoading, isError, error }, doFetch]: [
+		{ data: any; isLoading: boolean; isError: boolean; error: any },
+		any
+	] = useDataApi(`/products/${productId}`);
 
 	const [currentImage, setCurrentImage] = useState("");
 
@@ -88,7 +89,10 @@ const ProductPage = () => {
 				{showEditButtons && (
 					<div className="flex justify-end fixed left-0 w-full top-22 mx-auto z-20">
 						<Container className="flex justify-end w-full">
-							<Link to={`/product/${slug}/edit`} className="clickable cursor-pointer flex justify-center items-center bg-white rounded-full w-14 h-14 mr-2">
+							<Link
+								to={`/product/${slug}/edit`}
+								className="clickable cursor-pointer flex justify-center items-center bg-white rounded-full w-14 h-14 mr-2"
+							>
 								<Edit />
 							</Link>
 						</Container>
@@ -259,8 +263,7 @@ const ProductPage = () => {
 			</>
 		);
 	} else {
-		return <span>{error.message}
-		</span>;
+		return <span>{error.message}</span>;
 	}
 };
 

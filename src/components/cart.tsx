@@ -9,7 +9,7 @@ import * as Yup from "yup";
 import { SignupSchema, LoginSchema } from "./dashboard";
 
 import ShopContext from "../context/shopContext";
-import useDataApi, { API_URL } from "../hooks/api";
+import { API_URL } from "../hooks/api";
 import Spinner from "./spinner";
 import { ReactComponent as X } from "../assets/icons/x.svg";
 
@@ -18,12 +18,9 @@ const ProductCard = () => {
 	const [modalOpen, setmodalOpen] = useState(false);
 	const [modalState, setmodalState] = useState("");
 
-	const [{ data }, doFetch]: [
-		{ data: any; isLoading: boolean; isError: boolean; error: any },
-		any
-	] = useDataApi(`/auth/me`, JSON.parse(localStorage.user).token);
-
 	const [formError, setformError] = useState("");
+
+	const [userData, setuserData]: [any, any] = useState({});
 
 	const [showSpinner, setshowSpinner] = useState(false);
 
@@ -33,13 +30,34 @@ const ProductCard = () => {
 				JSON.parse(localStorage.user).token
 			);
 
-			if (Date.now() <= decodedToken.exp * 1000) {
+			if (Date.now() < decodedToken.exp * 1000) {
 				setLoggedIn(true);
-
-				doFetch(`/auth/me`, JSON.parse(localStorage.user).token);
+				axios
+					.get(`${API_URL}/auth/me`, {
+						headers: {
+							Authorization: `Bearer ${
+								JSON.parse(localStorage.user).token
+							}`,
+						},
+					})
+					.then((res) => setuserData(res.data));
 			}
 		}
-	}, [doFetch]);
+	}, []);
+
+	useEffect(() => {
+		if (loggedIn) {
+			axios
+				.get(`${API_URL}/auth/me`, {
+					headers: {
+						Authorization: `Bearer ${
+							JSON.parse(localStorage.user).token
+						}`,
+					},
+				})
+				.then((res) => setuserData(res.data));
+		}
+	}, [loggedIn]);
 
 	const OrderSchema = Yup.object().shape({
 		address: Yup.string().max(200, "Te lang!"),
@@ -195,9 +213,9 @@ const ProductCard = () => {
 									<>
 										<Formik
 											initialValues={{
-												address: data?.address,
-												postal: data?.zip_code,
-												city: data?.city,
+												address: userData.address || "",
+												postal: userData.zip_code || "",
+												city: userData.city || "",
 											}}
 											validationSchema={OrderSchema}
 											onSubmit={async (values) => {

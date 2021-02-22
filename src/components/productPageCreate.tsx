@@ -16,8 +16,6 @@ const ProductPageEdit = () => {
 
 	const [imageChanged, setimageChanged] = useState(false);
 
-	const [showEditButtons, setshowEditButtons] = useState(false);
-
 	const [showSpinner, setshowSpinner] = useState(false);
 
 	const [categories, setcategories] = useState([]);
@@ -33,11 +31,9 @@ const ProductPageEdit = () => {
 			);
 
 			if (
-				Date.now() <= decodedToken.exp * 1000 &&
-				JSON.parse(localStorage.user).user.role === "admin"
+				Date.now() >= decodedToken.exp * 1000 ||
+				JSON.parse(localStorage.user).user.role !== "admin"
 			) {
-				setshowEditButtons(true);
-			} else {
 				history.push(`/dashboard`);
 			}
 		} else {

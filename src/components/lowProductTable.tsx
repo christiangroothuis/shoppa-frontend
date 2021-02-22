@@ -14,7 +14,6 @@ const LowProductTable = ({ className }: { className?: string }) => {
 		doFetch(`/products_low`, JSON.parse(localStorage.user).token);
 	}, [doFetch]);
 
-	console.log(data);
 	return !isLoading && !isError ? (
 		<div className={`container ${className || ""}`}>
 			<table className="mt-4 w-full text-base ">
@@ -33,7 +32,9 @@ const LowProductTable = ({ className }: { className?: string }) => {
 								className="font-medium border-t border-gray-300 cursor-pointer h-10"
 								key={i}
 								onClick={() => {
-									history.push(`/product/${product.slug}/edit`);
+									history.push(
+										`/product/${product.slug}/edit`
+									);
 								}}
 							>
 								<td className="text-left">{product.id}</td>
@@ -42,7 +43,6 @@ const LowProductTable = ({ className }: { className?: string }) => {
 								<td className="text-right">
 									{product.availability}
 								</td>
-								<hr />
 							</tr>
 						);
 					})}

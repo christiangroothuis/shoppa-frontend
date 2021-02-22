@@ -13,7 +13,7 @@ const OrderPage = () => {
 
 	useEffect(() => {
 		doFetch(`/orders/${orderId}`, JSON.parse(localStorage.user).token);
-	}, [doFetch]);
+	}, [doFetch, orderId]);
 
 	let totalAmount = data?.data?.items.reduce((acc: number, cur: any) => {
 		if (cur.product) return acc + cur.product.price * cur.amount;
