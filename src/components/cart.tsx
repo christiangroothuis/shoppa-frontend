@@ -9,7 +9,7 @@ import * as Yup from "yup";
 import { SignupSchema, LoginSchema } from "./dashboard";
 
 import ShopContext from "../context/shopContext";
-import { API_URL } from "../hooks/api";
+import useDataApi, { API_URL } from "../hooks/api";
 import Spinner from "./spinner";
 import { ReactComponent as X } from "../assets/icons/x.svg";
 
@@ -18,7 +18,12 @@ const ProductCard = () => {
 	const [modalOpen, setmodalOpen] = useState(false);
 	const [modalState, setmodalState] = useState("");
 
-	const [error, setError] = useState("");
+	const [{ data }, doFetch]: [
+		{ data: any; isLoading: boolean; isError: boolean; error: any },
+		any
+	] = useDataApi(`/auth/me`, JSON.parse(localStorage.user).token);
+
+	const [formError, setformError] = useState("");
 
 	const [showSpinner, setshowSpinner] = useState(false);
 
@@ -30,9 +35,11 @@ const ProductCard = () => {
 
 			if (Date.now() <= decodedToken.exp * 1000) {
 				setLoggedIn(true);
+
+				doFetch(`/auth/me`, JSON.parse(localStorage.user).token);
 			}
 		}
-	}, []);
+	}, [doFetch]);
 
 	const OrderSchema = Yup.object().shape({
 		address: Yup.string().max(200, "Te lang!"),
@@ -188,9 +195,9 @@ const ProductCard = () => {
 									<>
 										<Formik
 											initialValues={{
-												address: "",
-												postal: "",
-												city: "",
+												address: data?.address,
+												postal: data?.zip_code,
+												city: data?.city,
 											}}
 											validationSchema={OrderSchema}
 											onSubmit={async (values) => {
@@ -222,7 +229,7 @@ const ProductCard = () => {
 															setshowSpinner(
 																false
 															);
-															setError(
+															setformError(
 																res.data.err
 															);
 														} else if (
@@ -237,13 +244,15 @@ const ProductCard = () => {
 															setshowSpinner(
 																false
 															);
-															setError("Error");
+															setformError(
+																"Error"
+															);
 														}
 													}
 												} catch (error) {
 													console.log(error);
 													setshowSpinner(false);
-													setError("Error");
+													setformError("Error");
 												}
 											}}
 										>
@@ -257,7 +266,7 @@ const ProductCard = () => {
 														vereist)
 													</span>
 													<div className="text-red-600">
-														{error}
+														{formError}
 													</div>
 													<label className="mt-10">
 														Straatnaam en
@@ -366,7 +375,7 @@ const ProductCard = () => {
 										}
 									} catch (error) {
 										setshowSpinner(false);
-										setError(
+										setformError(
 											"Er trad een fout op bij het registreren"
 										);
 									}
@@ -378,7 +387,7 @@ const ProductCard = () => {
 											Registreren
 										</h2>
 										<div className="text-red-600">
-											{error}
+											{formError}
 										</div>
 										<label className="mt-10">
 											Naam (Minimaal 4 karakters):
@@ -455,8 +464,7 @@ const ProductCard = () => {
 											setmodalState("");
 										}
 									} catch (error) {
-										setshowSpinner(false);
-										setError("Onjuiste inlogdata");
+										setformError("Onjuiste inlogdata");
 									}
 								}}
 							>
@@ -466,7 +474,7 @@ const ProductCard = () => {
 											Inloggen
 										</h2>
 										<div className="text-red-600">
-											{error}
+											{formError}
 										</div>
 										<label className="mt-10">
 											E-mail:

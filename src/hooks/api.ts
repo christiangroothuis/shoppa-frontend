@@ -58,7 +58,7 @@ const useDataApi = (
 		// return () => {
 		// 	source.cancel();
 		// }
-	}, [url]);
+	}, [token, url]);
 
 	return [{ data, isLoading, isError, error }, setUrl];
 };

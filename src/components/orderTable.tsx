@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import useDataApi from "../hooks/api";
 import Spinner from "./spinner";
 
 const OrderTable = ({ className }: { className?: string }) => {
 	const history = useHistory();
-	const [{ data, isLoading, isError, error }, doFetch]: [
+	const [{ data, isLoading, isError }, doFetch]: [
 		{ data: any; isLoading: boolean; isError: boolean; error: any },
 		any
 	] = useDataApi(`/orders`, JSON.parse(localStorage.user).token);

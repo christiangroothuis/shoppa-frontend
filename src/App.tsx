@@ -16,6 +16,7 @@ import GlobalState from "./context/globalState";
 import "./styles/output.css";
 import Info from "./components/info";
 import ProductPageEdit from "./components/productPageEdit";
+import ProductPageCreate from "./components/productPageCreate";
 import OrderPage from "./components/orderPage";
 
 function App() {
@@ -48,6 +49,9 @@ function App() {
 							</Route>
 							<Route path="/product/:productId/edit">
 								<ProductPageEdit />
+							</Route>
+							<Route exact path="/productcreate">
+								<ProductPageCreate />
 							</Route>
 							<Route path="/over">
 								<Info />

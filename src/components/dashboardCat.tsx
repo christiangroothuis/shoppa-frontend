@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from "react";
-import useDataApi, { API_URL } from "../hooks/api";
+import { API_URL } from "../hooks/api";
 import Spinner from "./spinner";
 import { ReactComponent as X } from "../assets/icons/x.svg";
 import axios from "axios";
 
 const DashboardCat = ({ className }: { className?: string }) => {
-	// const [{ data, isLoading, isError, error }, doFetch] = useDataApi(
-	// 	`/categories`
-	// );
-
 	const [data, setData] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [isError, setIsError] = useState(false);
@@ -18,17 +14,17 @@ const DashboardCat = ({ className }: { className?: string }) => {
 
 	const [newCategory, setnewCategory] = useState("");
 
-    const [update, setupdate] = useState(0);
+	const [update, setupdate] = useState(0);
 
 	useEffect(() => {
-        const fetchData = async () => {
+		const fetchData = async () => {
 			setIsError(false);
 			setIsLoading(true);
 
 			try {
 				const result = await axios({
 					method: "GET",
-					url: API_URL + '/categories',
+					url: API_URL + "/categories",
 					// cancelToken: source.token,
 					// data: { firstName: "Fred", lastName: "Flintstone" },
 				});
@@ -91,7 +87,7 @@ const DashboardCat = ({ className }: { className?: string }) => {
 																},
 															}
 														);
-                                                        setupdate(update+1)
+														setupdate(update + 1);
 														// doFetch("/categories");
 														setshowSpinner(false);
 													} catch (error) {}
@@ -128,8 +124,8 @@ const DashboardCat = ({ className }: { className?: string }) => {
 											);
 
 											setshowSpinner(false);
-                                            setnewCategory('')
-											setupdate(update+1)
+											setnewCategory("");
+											setupdate(update + 1);
 										} else {
 											alert("Categorie vereist");
 										}

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import jwt_decode from "jwt-decode";
 import { CSSTransition } from "react-transition-group";
 import Modal from "react-modal";
@@ -10,6 +10,8 @@ import Spinner from "./spinner";
 import OrderTable from "./orderTable";
 import AccountInfo from "./accountInfo";
 import DashboardCat from "./dashboardCat";
+import LowProductTable from "./lowProductTable";
+import { Link } from "react-router-dom";
 
 Modal.setAppElement("#root");
 
@@ -76,7 +78,7 @@ const Dashboard = () => {
 			</div>
 			{/* {JSON.parse(localStorage.user).user.name}  */}
 			{loggedIn && (
-				<div>
+				<div >
 					<div className="">
 						<h2 className="font-bold text-2xl">Accountinfo</h2>
 						<AccountInfo />
@@ -91,6 +93,12 @@ const Dashboard = () => {
 						</>
 					) : (
 						<>
+							<Link
+								to="/productcreate"
+								className="bg-blue-600 text-white flex justify-center items-center h-16 max-w-100 rounded-xl px-4 py-5 font-bold text-xl mt-10 clickable"
+							>
+								Product toevoegen
+							</Link>
 							<h2 className="text-2xl font-bold mt-10">
 								Categorieën
 							</h2>
@@ -99,6 +107,10 @@ const Dashboard = () => {
 								Alle bestellingen
 							</h2>
 							<OrderTable />
+							<h2 className="font-bold text-2xl mt-10">
+								Producten met lage voorraad
+							</h2>
+							<LowProductTable />
 						</>
 					)}
 				</div>
