@@ -56,7 +56,7 @@ function App() {
 							<Route path="/over" exact>
 								<Info />
 							</Route>
-							<Route path="/return" exact>
+							<Route path="/return">
 								<Return />
 							</Route>
 						</Switch>
