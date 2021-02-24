@@ -17,9 +17,18 @@ const DashboardCat = ({ className }: { className?: string }) => {
 	const [update, setupdate] = useState(0);
 
 	useEffect(() => {
+		let cancel: any;
+
 		const fetchData = async () => {
 			setIsError(false);
 			setIsLoading(true);
+
+			if (cancel) {
+				// Cancel the previous request before making a new request
+				cancel.cancel();
+			}
+
+			cancel = axios.CancelToken.source();
 
 			try {
 				const result = await axios({
@@ -31,15 +40,24 @@ const DashboardCat = ({ className }: { className?: string }) => {
 
 				setData(result.data);
 			} catch (error) {
-				setIsError(true);
-				setError(error);
+				if (axios.isCancel(error)) {
+					// Handle if request was cancelled
+					console.log("Request canceled");
+				} else {
+					// Handle usual errors
+					console.log("Fout bij opvragen bij API: ", error);
+					setIsError(true);
+					setError(error);
+				}
 			}
 			setIsLoading(false);
 		};
 
 		fetchData();
 
-		// doFetch("/categories");
+		return () => {
+			cancel.cancel();
+		};
 	}, [update]);
 
 	return (

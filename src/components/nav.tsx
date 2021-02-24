@@ -97,7 +97,7 @@ const Nav = () => {
 						<div className="absolute w-full bg-white h-150 max-h-screen rounded-b-2xl overflow-y-scroll pt-2 -mt-2 border-2 border-gray">
 							{!isLoading && !isError ? (
 								<div>
-									{results.length > 0 ? (
+									{results && results.length > 0 ? (
 										results.map((result: any) => {
 											return (
 												<Link
@@ -125,7 +125,7 @@ const Nav = () => {
 																	? result
 																			.images[0]
 																			.image_url
-																	: "https://cdn.discordapp.com/attachments/811000693715370005/811286686675370014/Drip_Placeholder.png"
+																	: "http://informatica.gymnasiumbreda.nl/informatica/leerlingenwebsites/IN2021/ProjectWebsites/Drip/backend/public//uploads/images/Drip_placeholder.png"
 															}
 															alt={result.title}
 															onLoad={() =>

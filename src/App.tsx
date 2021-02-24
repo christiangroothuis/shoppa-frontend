@@ -32,13 +32,13 @@ function App() {
 								<Home />
 							</Route>
 							{/* <Route path="/search">search</Route> */}
-							<Route path="/winkelmand">
+							<Route path="/winkelmand" exact>
 								<Cart />
 							</Route>
-							<Route path="/producten/" exact>
+							<Route path="/producten" exact>
 								<ProductOverview />
 							</Route>
-							<Route path="/dashboard/" exact>
+							<Route path="/dashboard" exact>
 								<Dashboard />
 							</Route>
 							<Route exact path="/product/:productId">
@@ -47,16 +47,16 @@ function App() {
 							<Route exact path="/order/:orderId">
 								<OrderPage />
 							</Route>
-							<Route path="/product/:productId/edit">
+							<Route path="/product/:productId/edit" exact>
 								<ProductPageEdit />
 							</Route>
 							<Route exact path="/productcreate">
 								<ProductPageCreate />
 							</Route>
-							<Route path="/over">
+							<Route path="/over" exact>
 								<Info />
 							</Route>
-							<Route path="/return">
+							<Route path="/return" exact>
 								<Return />
 							</Route>
 						</Switch>

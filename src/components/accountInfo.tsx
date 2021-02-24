@@ -10,7 +10,7 @@ const AccountInfo = ({ className }: { className?: string }) => {
 
 	const [showSpinner, setshowSpinner] = useState(false);
 
-	const [{ data, isLoading, isError, error }, doFetch]: [
+	const [{ data, isLoading, isError }, doFetch]: [
 		{ data: any; isLoading: boolean; isError: boolean; error: any },
 		any
 	] = useDataApi(`/auth/me`, JSON.parse(localStorage.user).token);
@@ -43,7 +43,7 @@ const AccountInfo = ({ className }: { className?: string }) => {
 			onSubmit={async (values: any) => {
 				setshowSpinner(true);
 				try {
-					const res = await axios.put(`${API_URL}/auth/me/`, values, {
+					await axios.put(`${API_URL}/auth/me`, values, {
 						headers: {
 							Authorization: `Bearer ${
 								JSON.parse(localStorage.user).token
