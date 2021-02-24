@@ -82,7 +82,7 @@ const Nav = () => {
 					<input
 						onFocus={() => setShowResult(true)}
 						onBlur={() => {
-							setTimeout(() => setShowResult(false), 150);
+							setTimeout(() => setShowResult(false), 200);
 						}}
 						ref={inputRef}
 						onChange={onChange}
