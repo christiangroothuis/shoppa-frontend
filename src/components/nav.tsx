@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useHistory } from "react-router-dom";
 
 import React, { useContext, createRef, useState } from "react";
 import Container from "./container";
@@ -13,6 +13,8 @@ import ShopContext from "../context/shopContext";
 import useDataApi from "../hooks/api";
 
 const Nav = () => {
+	const history = useHistory();
+
 	const [query, setQuery] = useState("");
 
 	const [imageLoaded, setImageLoaded] = useState(false);
@@ -78,7 +80,16 @@ const Nav = () => {
 						Help
 					</a>
 				</div>
-				<form className="w-3/5 max-w-md relative">
+				<form
+					className="w-3/5 max-w-md relative"
+					onSubmit={(e) => {
+						e.preventDefault();
+						if (results && results.length > 0 && !isLoading) {
+							history.push(`/product/${results[0].slug}`);
+							inputRef.current?.blur();
+						}
+					}}
+				>
 					<input
 						onFocus={() => setShowResult(true)}
 						onBlur={() => {
