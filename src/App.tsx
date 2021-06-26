@@ -22,7 +22,7 @@ import OrderPage from "./components/orderPage";
 function App() {
 	return (
 		<GlobalState>
-			<Router basename="/informatica/leerlingenwebsites/IN2021/ProjectWebsites/Drip/">
+			<Router>
 				<div className="flex flex-col justify-between min-h-screen">
 					<Nav />
 
