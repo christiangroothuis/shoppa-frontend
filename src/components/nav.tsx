@@ -73,7 +73,7 @@ const Nav = () => {
 					</NavLink>
 					<a
 						className="nav-item bg-black text-white hover:bg-gray-500"
-						href="/backend/public/documenten/DRIP-Handleiding.pdf"
+						href="/backend/documenten/DRIP-Handleiding.pdf"
 						target="_blank"
 						rel="noreferrer"
 					>
