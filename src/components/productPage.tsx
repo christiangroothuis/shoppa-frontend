@@ -110,7 +110,7 @@ const ProductPage = () => {
 								src={
 									images[0] && images[0].image_url !== null
 										? currentImage
-										: "http://informatica.gymnasiumbreda.nl/informatica/leerlingenwebsites/IN2021/ProjectWebsites/Drip/backend/public//uploads/images/Drip_placeholder.png"
+										: "/backend/uploads/images/3032/Drip_placeholder.png"
 								}
 								alt={title}
 								onLoad={() => setImageLoaded(true)}

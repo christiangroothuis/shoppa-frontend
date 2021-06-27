@@ -73,7 +73,7 @@ const Nav = () => {
 					</NavLink>
 					<a
 						className="nav-item bg-black text-white hover:bg-gray-500"
-						href="http://informatica.gymnasiumbreda.nl/informatica/leerlingenwebsites/IN2021/ProjectWebsites/Drip/backend/public/documenten/DRIP-Handleiding.pdf"
+						href="/backend/public/documenten/DRIP-Handleiding.pdf"
 						target="_blank"
 						rel="noreferrer"
 					>
@@ -136,7 +136,7 @@ const Nav = () => {
 																	? result
 																			.images[0]
 																			.image_url
-																	: "http://informatica.gymnasiumbreda.nl/informatica/leerlingenwebsites/IN2021/ProjectWebsites/Drip/backend/public//uploads/images/Drip_placeholder.png"
+																	: "/backend/uploads/images/3032/Drip_placeholder.png"
 															}
 															alt={result.title}
 															onLoad={() =>
