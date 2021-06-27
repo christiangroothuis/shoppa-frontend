@@ -136,7 +136,7 @@ const Nav = () => {
 																	? result
 																			.images[0]
 																			.image_url
-																	: "/backend/uploads/images/3032/Drip_placeholder.png"
+																	: "/backend/uploads/images/Drip_placeholder.png"
 															}
 															alt={result.title}
 															onLoad={() =>
