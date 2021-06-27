@@ -17,7 +17,7 @@ const Info = () => {
 			Engels dat in de Verenigde Staten is gepopulariseerd, door middel
 			van dit woord wordt er aangeduid dat iemands outfit zeer in de mode
 			is.<br></br>
-			Er is deze naam gekozen, omdat dit in eerste instantie een
+			Er is voor deze naam gekozen, omdat dit in eerste instantie een
 			streetwear webshop was, echter is later gekozen om een groter
 			assortiment te implementeren.<br></br>
 			<br></br>
