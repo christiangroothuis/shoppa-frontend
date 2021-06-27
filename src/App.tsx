@@ -59,6 +59,10 @@ function App() {
 							<Route path="/return">
 								<Return />
 							</Route>
+
+							<Route path="*" status={404}>
+								404 Not found
+							</Route>
 						</Switch>
 					</Container>
 					<Footer />
