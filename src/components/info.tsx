@@ -1,12 +1,11 @@
 import { ReactComponent as Download } from "../assets/icons/external-link.svg";
-import React from "react";
 
 const Info = () => {
 	return (
 		<div>
 			<h1 className="text-5xl font-bold mb-5">Info</h1>
-			Deze website is gemaakt door Christian Groothuis, Aram Jegoian, Kuba
-			Pelka, Pepijn Weijerman en Troy van Wezel voor het vak informatica.
+			Deze website is gemaakt door Christian Groothuis voor het vak
+			informatica.
 			<br></br>
 			DRIP is een webshop dat producten verkoopt uit verschillende
 			categorieën bestaande uit onder andere: schoenen, kleding,
@@ -18,25 +17,16 @@ const Info = () => {
 			Engels dat in de Verenigde Staten is gepopulariseerd, door middel
 			van dit woord wordt er aangeduid dat iemands outfit zeer in de mode
 			is.<br></br>
-			Wij hebben voor deze naam gekozen, omdat wij in eerste instantie een
-			streetwear webshop wilden maken, echter hebben wij later gekozen om
-			een groter assortiment te implementeren.<br></br>
+			Er is deze naam gekozen, omdat dit in eerste instantie een
+			streetwear webshop was, echter is later gekozen om een groter
+			assortiment te implementeren.<br></br>
 			<br></br>
 			<h1 className="text-5xl font-bold mb-5">Bestanden</h1>
 			<div className="flex flex-col flex-wrap">
 				<a
 					target="_blank"
 					rel="noreferrer"
-					href="http://informatica.gymnasiumbreda.nl/informatica/leerlingenwebsites/IN2021/ProjectWebsites/Drip/backend/public/documenten/Projectplan.docx"
-					className="clickable flex justify-center mr-5 px-10 py-4 mt-3 w-88 font-medium text-white  bg-black rounded-xl text-xl"
-				>
-					Projectplan
-					<Download className="ml-2" />
-				</a>
-				<a
-					target="_blank"
-					rel="noreferrer"
-					href="http://informatica.gymnasiumbreda.nl/informatica/leerlingenwebsites/IN2021/ProjectWebsites/Drip/backend/public/documenten/SRD.docx"
+					href="/backend/documenten/SRD.docx"
 					className="clickable flex justify-center mr-5 px-10 py-4 mt-3 w-88 font-medium text-white  bg-black rounded-xl text-xl"
 				>
 					SRD
@@ -45,7 +35,7 @@ const Info = () => {
 				<a
 					target="_blank"
 					rel="noreferrer"
-					href="http://informatica.gymnasiumbreda.nl/informatica/leerlingenwebsites/IN2021/ProjectWebsites/Drip/backend/public/documenten/Designdocument.pdf"
+					href="/backend/documenten/Designdocument.pdf"
 					className="clickable flex justify-center mr-5 px-10 py-4 mt-3 w-88 font-medium text-white  bg-black rounded-xl text-xl"
 				>
 					Designdocument
@@ -54,37 +44,10 @@ const Info = () => {
 				<a
 					target="_blank"
 					rel="noreferrer"
-					href="http://informatica.gymnasiumbreda.nl/informatica/leerlingenwebsites/IN2021/ProjectWebsites/Drip/backend/public/documenten/database_ontwerp.jpg"
+					href="/backend/documenten/database_ontwerp.jpg"
 					className="clickable flex justify-center mr-5 px-10 py-4 mt-3 w-88 font-medium text-white  bg-black rounded-xl text-xl"
 				>
 					Databasedocument
-					<Download className="ml-2" />
-				</a>
-				<a
-					target="_blank"
-					rel="noreferrer"
-					href="http://informatica.gymnasiumbreda.nl/informatica/leerlingenwebsites/IN2021/ProjectWebsites/Drip/backend/public/documenten/Planning_en_Taakverdeling.xlsx"
-					className="clickable flex justify-center mr-5 px-10 py-4 mt-3 w-88 font-medium text-white  bg-black rounded-xl text-xl"
-				>
-					Planning & Taakverdeling
-					<Download className="ml-2" />
-				</a>
-				<a
-					target="_blank"
-					rel="noreferrer"
-					href="http://informatica.gymnasiumbreda.nl/informatica/leerlingenwebsites/IN2021/ProjectWebsites/Drip/backend/public/documenten/Logboeken_dripshoppa.xlsx"
-					className="clickable flex justify-center mr-5 px-10 py-4 mt-3 w-88 font-medium text-white  bg-black rounded-xl text-xl"
-				>
-					Logboeken
-					<Download className="ml-2" />
-				</a>
-				<a
-					target="_blank"
-					rel="noreferrer"
-					href="http://informatica.gymnasiumbreda.nl/informatica/leerlingenwebsites/IN2021/ProjectWebsites/Drip/backend/public/documenten/Testrapporten-DRIP.docx"
-					className="clickable flex justify-center mr-5 px-10 py-4 mt-3 w-88 font-medium text-white  bg-black rounded-xl text-xl"
-				>
-					Testrapporten
 					<Download className="ml-2" />
 				</a>
 			</div>
