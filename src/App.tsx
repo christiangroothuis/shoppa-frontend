@@ -1,5 +1,9 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+    BrowserRouter as Router,
+    Route,
+    Switch,
+} from "react-router-dom";
 
 import Container from "./components/container";
 import Nav from "./components/nav";
@@ -60,7 +64,7 @@ function App() {
 								<Return />
 							</Route>
 
-							<Route path="*" status={404}>
+							<Route path="*" exact={true}>
 								404 Not found
 							</Route>
 						</Switch>
