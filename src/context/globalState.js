@@ -9,7 +9,6 @@ import {
 } from "./reducers";
 
 const GlobalState = (props) => {
-	// const [cart, setCart] = useState([]);
 	const [cartState, dispatch] = useReducer(shopReducer, {
 		cart: localStorage.cart ? JSON.parse(localStorage.cart) : [],
 	});
@@ -19,12 +18,10 @@ const GlobalState = (props) => {
 	};
 
 	const decreaseProductFromCart = (productId) => {
-		// setCart(updatedCart);
 		dispatch({ type: DECREASE_PRODUCT, productId: productId });
 	};
 
 	const removeProductFromCart = (productId) => {
-		// setCart(updatedCart);
 		dispatch({ type: REMOVE_PRODUCT, productId: productId });
 	};
 
